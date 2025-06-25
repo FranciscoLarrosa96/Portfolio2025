@@ -1,0 +1,67 @@
+@use '../assets/styles/responsive.scss' as *;
+
+.imgFran {
+    @include mobile {
+        width: 170px;
+        height: 170px;
+    }
+
+    @include tablet {
+        width: 200px;
+        height: 200px;
+    }
+
+    @include laptop {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+.textGenerated {
+    @include mobile {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+    @include tablet {
+        font-size: 1.4rem;
+        margin-top: 15px;
+    }
+
+    @include laptop {
+        font-size: 1.6rem;
+        margin-top: 20px;
+    }
+
+    @include desktop {
+        font-size: 2.25rem;
+        margin-top: 25px;
+    }
+}
+
+.navegacion {
+    @include mobile {
+        font-size: 1.2rem;
+    }
+
+
+    @include mobile-m {
+        font-size: 1rem;
+    }
+
+    @include mobile-s {
+        font-size: 0.8rem;
+    }
+
+    @include tablet {
+        font-size: 1.4rem;
+    }
+
+    @include laptop {
+        font-size: 1.6rem;
+    }
+
+    @include desktop {
+        font-size: 1.8rem;
+    }
+}

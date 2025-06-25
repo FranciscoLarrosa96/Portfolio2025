@@ -1,21 +1,21 @@
 <header
     class="fixed w-full backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-white/10 z-50 p-4 flex justify-between items-center transition-colors duration-300">
-    <div class="navigation">
-        <nav class="space-x-4 text-text dark:text-white text-2xl">
+    <div class="navigation" data-aos="zoom-in">
+        <nav class="space-x-4 text-text dark:text-white text-2xl navegacion">
             <a href="#home" class="hover:text-hover dark:hover:text-main transition-colors">Inicio</a>
             <a href="#about" class="hover:text-hover dark:hover:text-main transition-colors">Sobre mí</a>
             <a href="#projects" class="hover:text-hover dark:hover:text-main transition-colors">Proyectos</a>
-            <a href="#contact" class="hover:text-hover dark:hover:text-main transition-colors">Contacto</a>
+            <a href="#contact" class="hover:text-hover dark:hover:text-main transition-colors mr-4">Contacto</a>
         </nav>
     </div>
     <div class="toggleMode">
-        <label class="relative inline-flex items-center cursor-pointer">
-            <input (click)="toggleDarkMode()" class="sr-only peer" value="true" [checked]="this.isDarkMode"
-                type="checkbox" />
-            <div
-                class="w-24 h-12 rounded-full ring-0 peer duration-500 outline-none bg-gray-200 overflow-hidden before:flex before:items-center before:justify-center after:flex after:items-center after:justify-center before:content-['☀️'] before:absolute before:h-10 before:w-10 before:top-1/2 before:bg-white before:rounded-full before:left-1 before:-translate-y-1/2 before:transition-all before:duration-700 peer-checked:before:opacity-0 peer-checked:before:rotate-90 peer-checked:before:-translate-y-full shadow-lg shadow-gray-400 peer-checked:shadow-lg peer-checked:shadow-gray-700 peer-checked:bg-[#383838] after:content-['🌑'] after:absolute after:bg-[#1d1d1d] after:rounded-full after:top-[4px] after:right-1 after:translate-y-full after:w-10 after:h-10 after:opacity-0 after:transition-all after:duration-700 peer-checked:after:opacity-100 peer-checked:after:rotate-180 peer-checked:after:translate-y-0">
-            </div>
-        </label>
+        <button class="switchTheme" mat-icon-button (click)="this.toggleDarkMode()">
+            @if(isDarkMode){
+            <i class="fa-solid fa-sun text-white lg:text-3xl pr-4 md:text-2xl sm:text-xl"></i>
+            }@else {
+            <i class="fa-solid fa-moon lg:text-3xl pr-4 md:text-2xl sm:text-xl"></i>
+            }
+        </button>
     </div>
 </header>
 
@@ -29,10 +29,10 @@
             style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
         </ng-particles>
         <div class="rounded-full overflow-hidden border-4 border-black dark:border-white shadow-lg">
-            <img src="assets/img/picture.avif" alt="francisco larrosa" class="h-[400px] object-cover" />
+            <img src="assets/img/picture.avif" alt="francisco larrosa" class="h-[400px] object-cover imgFran" />
         </div>
 
-        <h1 class="text-4xl font-bold text-center font-sans">
+        <h1 class="text-4xl font-bold text-center font-sans textGenerated">
             <ng-container *ngFor="let c of typedChars">
                 <span [ngClass]="c.class">{{ c.char }}</span>
             </ng-container>
@@ -41,13 +41,48 @@
     </section>
 
 
-    <section
-        class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-[#1a1a1a] text-text dark:text-white transition-colors duration-300"
-        id="about">
-        <div data-aos="fade-right" class="text-center">
-            <h2 class="text-3xl">Sobre mí</h2>
-        </div>
-    </section>
+<section
+  id="about"
+  class="min-h-screen flex items-center justify-center px-4 py-20 bg-gray-100 dark:bg-[#1a1a1a] text-text dark:text-white transition-colors duration-300"
+>
+  <div
+    data-aos="fade-right"
+    class="max-w-4xl mx-auto text-center space-y-6"
+  >
+    <h2 class="text-4xl font-bold text-main">Sobre mí</h2>
+
+    <p class="text-lg leading-relaxed">
+      ¡Hola! Soy <span class="font-semibold text-main">Francisco Larrosa</span>, un apasionado <span class="text-red-600 font-semibold">Frontend Developer</span> especializado en
+      <span class="text-red-700 font-semibold">Angular</span> y <span class="text-sky-500 font-semibold">Tailwind CSS</span>. Me encanta construir interfaces modernas, rápidas y accesibles que no solo funcionen bien, sino que también luzcan increíbles.
+    </p>
+
+    <p class="text-lg leading-relaxed">
+      Hace más de <span class="font-semibold text-main">3 años</span> que me dedico al desarrollo frontend, creando experiencias web modernas, intuitivas y performantes. Estoy en constante mejora, aprendiendo día a día y perfeccionando mis habilidades con cada proyecto.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-4 mt-6">
+      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+        Angular
+      </span>
+      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+        TypeScript
+      </span>
+      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+        Tailwind CSS
+      </span>
+      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+        HTML & SCSS
+      </span>
+      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+        Git & GitHub
+      </span>
+      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+        Responsive Design
+      </span>
+    </div>
+  </div>
+</section>
+
 
     <section
         class="min-h-screen flex items-center justify-center bg-background dark:bg-[#121212] text-text dark:text-white transition-colors duration-300"
