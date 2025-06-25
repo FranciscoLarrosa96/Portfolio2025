@@ -1,12 +1,79 @@
-<ng-particles
-  [id]="'tsparticles'"
-  [options]="particlesOptions"
-  [particlesInit]="particlesInit"
-  style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0;"
-></ng-particles>
+<header
+    class="fixed w-full backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-white/10 z-50 p-4 flex justify-between items-center transition-colors duration-300">
+    <div class="navigation">
+        <nav class="space-x-4 text-text dark:text-white text-2xl">
+            <a href="#home" class="hover:text-hover dark:hover:text-main transition-colors">Inicio</a>
+            <a href="#about" class="hover:text-hover dark:hover:text-main transition-colors">Sobre mí</a>
+            <a href="#projects" class="hover:text-hover dark:hover:text-main transition-colors">Proyectos</a>
+            <a href="#contact" class="hover:text-hover dark:hover:text-main transition-colors">Contacto</a>
+        </nav>
+    </div>
+    <div class="toggleMode">
+        <label class="relative inline-flex items-center cursor-pointer">
+            <input (click)="toggleDarkMode()" class="sr-only peer" value="true" [checked]="this.isDarkMode"
+                type="checkbox" />
+            <div
+                class="w-24 h-12 rounded-full ring-0 peer duration-500 outline-none bg-gray-200 overflow-hidden before:flex before:items-center before:justify-center after:flex after:items-center after:justify-center before:content-['☀️'] before:absolute before:h-10 before:w-10 before:top-1/2 before:bg-white before:rounded-full before:left-1 before:-translate-y-1/2 before:transition-all before:duration-700 peer-checked:before:opacity-0 peer-checked:before:rotate-90 peer-checked:before:-translate-y-full shadow-lg shadow-gray-400 peer-checked:shadow-lg peer-checked:shadow-gray-700 peer-checked:bg-[#383838] after:content-['🌑'] after:absolute after:bg-[#1d1d1d] after:rounded-full after:top-[4px] after:right-1 after:translate-y-full after:w-10 after:h-10 after:opacity-0 after:transition-all after:duration-700 peer-checked:after:opacity-100 peer-checked:after:rotate-180 peer-checked:after:translate-y-0">
+            </div>
+        </label>
+    </div>
+</header>
 
 
 
-<div class="relative z-10 p-10 text-center text-2xl">
-  Partículas andando 🎉
-</div>
+<main class="pt-20 scroll-smooth">
+    <section id="home"
+        class="min-h-screen flex flex-col items-center justify-center gap-6  text-text dark:text-white transition-colors duration-300">
+        <ng-particles [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit"
+            style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
+        </ng-particles>
+        <div class="rounded-full overflow-hidden border-4 border-black dark:border-white shadow-lg">
+            <img src="assets/img/picture.avif" alt="francisco larrosa" class="h-[400px] object-cover" />
+        </div>
+
+        <h1 class="text-4xl font-bold text-center font-sans">
+            <ng-container *ngFor="let c of typedChars">
+                <span [ngClass]="c.class">{{ c.char }}</span>
+            </ng-container>
+            <span class="animate-pulse">|</span>
+        </h1>
+    </section>
+
+
+    <section
+        class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-[#1a1a1a] text-text dark:text-white transition-colors duration-300"
+        id="about">
+        <div data-aos="fade-right" class="text-center">
+            <h2 class="text-3xl">Sobre mí</h2>
+        </div>
+    </section>
+
+    <section
+        class="min-h-screen flex items-center justify-center bg-background dark:bg-[#121212] text-text dark:text-white transition-colors duration-300"
+        id="projects">
+        <div data-aos="zoom-in" class="text-center">
+            <h2 class="text-3xl">Proyectos</h2>
+        </div>
+    </section>
+
+
+    <section id="contact"
+        class="min-h-screen bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center text-text dark:text-white transition-colors duration-500">
+        <div data-aos="fade-left" class="text-center">
+            <h2 class="text-3xl">Contacto</h2>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-background dark:bg-gray-900 text-text-primary dark:text-gray-300 py-8 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4">
+        <!-- Derechos de autor -->
+        <div class="mt-6 text-center text-sm">
+            <p>&copy; 2025 Portfolio. Todos los derechos reservados. Desarrollado por
+                <a href="https://github.com/FranciscoLarrosa96" target="_blank" rel="noopener noreferrer"
+                    class="text-main hover:underline font-semibold">Francisco Larrosa</a>.
+            </p>
+        </div>
+    </div>
+</footer>

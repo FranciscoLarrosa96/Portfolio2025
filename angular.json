@@ -97,6 +97,9 @@
               "node_modules/aos/dist/aos.js"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

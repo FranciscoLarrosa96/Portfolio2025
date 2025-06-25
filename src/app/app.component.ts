@@ -19,13 +19,15 @@ interface TypedChar {
 export class AppComponent implements OnInit, AfterViewInit {
   particlesOptions: ISourceOptions = {
     background: {
-      color: { value: "transparent" },
+      color: { value: getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim() }
     },
     fpsLimit: 60,
     particles: {
-      color: { value: "#00ffcc" }, // verde agua
+    color: {
+      value: getComputedStyle(document.documentElement).getPropertyValue('--main-color').trim()
+    },
       links: {
-        color: "#00ffcc",
+        color: "#000000",
         distance: 150,
         enable: true,
         opacity: 0.5,
@@ -81,7 +83,19 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.configDarkMode();
+    this.updateDarkModeClass();
+    this.typeLoop();
+  }
 
+  ngAfterViewInit(): void {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }
+
+  configDarkMode() {
     // Detecta si el sistema está en modo oscuro
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -93,16 +107,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     } else {
       this.isDarkMode = prefersDark;
     }
-
-    this.updateDarkModeClass();
-    this.typeLoop();
-  }
-
-  ngAfterViewInit(): void {
-    AOS.init({
-      duration: 1000,
-      once: false,
-    });
   }
 
   toggleDarkMode() {
