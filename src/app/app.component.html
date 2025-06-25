@@ -24,7 +24,8 @@
 <main class="pt-20 scroll-smooth">
     <section id="home"
         class="min-h-screen flex flex-col items-center justify-center gap-6  text-text dark:text-white transition-colors duration-300">
-        <ng-particles [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit"
+        <ng-particles #particlesRef [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit"
+            (particlesLoaded)="onParticlesLoaded($event)"
             style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
         </ng-particles>
         <div class="rounded-full overflow-hidden border-4 border-black dark:border-white shadow-lg">
