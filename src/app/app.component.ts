@@ -53,13 +53,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   texts: TypedChar[][] = [
     [...'¡Hola! Soy Frontend Dev'].map(char => ({ char, class: 'text-main' })),
-    [
-      ...'Trabajo con '.split('').map(c => ({ char: c, class: '' })),
-      ...'Angular'.split('').map(c => ({ char: c, class: 'text-red-600 font-semibold' })),
-      { char: ' ', class: '' },
-      ...'y '.split('').map(c => ({ char: c, class: '' })),
-      ...'Tailwind'.split('').map(c => ({ char: c, class: 'text-sky-500 font-semibold' })),
-    ],
     [...'Bienvenido a mi portfolio!'].map(char => ({ char, class: 'text-main' }))
   ];
 
@@ -198,12 +191,12 @@ export class AppComponent implements OnInit, AfterViewInit {
           speed: 2,
         },
         number: {
-          value: 60,
+          value: 70,
           density: { enable: true, area: 800 },
         },
         opacity: { value: 0.7 },
         shape: { type: "circle" },
-        size: { value: { min: 2, max: 6 } },
+        size: { value: { min: 2, max: 7 } },
       },
       detectRetina: true,
     };
