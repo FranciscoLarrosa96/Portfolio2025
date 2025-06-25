@@ -35,13 +35,14 @@
     <!-- Botones: idioma + dark mode -->
     <div class="flex items-center space-x-4">
         <button (click)="toggleLanguage()"
-            class="w-10 h-6 flex items-center justify-center transition-colors duration-300">
+            class="w-10 h-6 flex items-center justify-center transition-colors duration-300" aria-label="Cambiar idioma">
             <img [src]="language === 'es' ? 'assets/img/us.webp' : 'assets/img/es.webp'"
                 [alt]="language === 'es' ? 'Switch to English' : 'Cambiar a Español'" class="w-6 h-auto" />
         </button>
 
         <div class="toggleMode">
-            <button class="switchTheme" mat-icon-button (click)="toggleDarkMode()">
+            <button class="switchTheme" mat-icon-button (click)="toggleDarkMode()" aria-label="Cambiar a modo claro"
+  [attr.aria-label]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
                 @if(isDarkMode){
                 <i class="fa-solid fa-sun text-white lg:text-3xl pr-4 md:text-2xl sm:text-xl"></i>
                 }@else {
