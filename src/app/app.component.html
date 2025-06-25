@@ -55,9 +55,9 @@
 
 
 
-<main class="scroll-smooth" id="home">
+<main class="scroll-smooth" >
     <section 
-        class="min-h-screen flex flex-col items-center justify-center gap-6  text-text dark:text-white transition-colors duration-300">
+        class="min-h-screen flex flex-col items-center justify-center gap-6  text-text dark:text-white transition-colors duration-300" id="home">
         <ng-particles #particlesRef [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit"
             (particlesLoaded)="onParticlesLoaded($event)"
             style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
@@ -136,13 +136,60 @@
     </section>
 
 
-    <section
-        class="min-h-screen flex items-center justify-center bg-background dark:bg-[#121212] text-text dark:text-white transition-colors duration-300"
-        id="projects">
-        <div data-aos="zoom-in" class="text-center">
-            <h2 class="text-3xl">Proyectos</h2>
+    <!-- Proyectos -->
+    <section id="projects" class="py-16 px-4 sm:px-8 lg:px-20 bg-background dark:bg-black text-text dark:text-white">
+      <h2 class="text-3xl font-bold text-main mb-12 text-center" data-aos="fade-up">
+        {{ language === 'es' ? 'Proyectos Destacados' : 'Featured Projects' }}
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- Proyecto 1 -->
+        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
+          <img src="assets/img/landingpageivan.avif" alt="Landing page de Ivan" class="rounded-t-2xl w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Landing Page - Servicio Técnico</h3>
+            <p class="text-sm mb-4">
+              {{ language === 'es' 
+                ? 'Una landing elegante y moderna, construida con Angular, Tailwind CSS y animaciones suaves para una presencia online profesional.' 
+                : 'A sleek and modern landing page built with Angular, Tailwind CSS, and subtle animations for a strong online presence.' }}
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs mb-4">
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">SCSS</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
+            </div>
+            <a href="https://franciscolarrosa96.github.io/landingPageIvan/" target="_blank" rel="noopener noreferrer"
+              class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
+              {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
+            </a>
+          </div>
         </div>
+
+        <!-- Proyecto 2 -->
+        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
+          <img src="assets/img/clinicadeojos.avif" alt="Clínica de ojos" class="rounded-t-2xl w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Clínica de Ojos</h3>
+            <p class="text-sm mb-4">
+              {{ language === 'es' 
+                ? 'Sitio institucional para una clínica oftalmológica, con navegación fluida, diseño adaptable y secciones bien estructuradas.' 
+                : 'Institutional website for an eye clinic, with smooth navigation, responsive design, and well-structured content.' }}
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs mb-4">
+              <span class="bg-main/10 text-main px-2 py-1 rounded">HTML</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">CSS</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">JavaScript</span>
+            </div>
+            <a href="https://franciscolarrosa96.github.io/ClinicaDeOjos/#home" target="_blank" rel="noopener noreferrer"
+              class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
+              {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
+
 
 
     <section id="contact"

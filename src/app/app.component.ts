@@ -74,7 +74,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   private container?: Container;
 
   private async _particlesInit(engine: Engine): Promise<void> {
-    console.log("tsparticles engine loaded", engine);
     await loadSlim(engine);
   }
 
