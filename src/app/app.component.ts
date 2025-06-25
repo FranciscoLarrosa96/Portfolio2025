@@ -2,18 +2,54 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import * as AOS from 'aos';
+import { NgParticlesModule } from 'ng-particles';
+import type { ISourceOptions } from 'tsparticles-engine';
+import { loadSlim } from "tsparticles-slim";
+import type { Engine } from "tsparticles-engine";
 interface TypedChar {
   char: string;
   class: string;
 }
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, NgParticlesModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, AfterViewInit {
+  particlesOptions: ISourceOptions = {
+    background: {
+      color: { value: "transparent" },
+    },
+    fpsLimit: 60,
+    particles: {
+      color: { value: "#00ffcc" }, // verde agua
+      links: {
+        color: "#00ffcc",
+        distance: 150,
+        enable: true,
+        opacity: 0.5,
+        width: 1,
+      },
+      collisions: { enable: true },
+      move: {
+        direction: "none",
+        enable: true,
+        outModes: { default: "bounce" },
+        speed: 2,
+      },
+      number: {
+        value: 60,
+        density: { enable: true, area: 800 },
+      },
+      opacity: { value: 0.7 },
+      shape: { type: "circle" },
+      size: { value: { min: 2, max: 6 } },
+    },
+    detectRetina: true,
+  };
 
+  particlesInit = this._particlesInit.bind(this);
 
   texts: TypedChar[][] = [
     [...'¡Hola! Soy Frontend Dev'].map(char => ({ char, class: 'text-main' })),
@@ -37,6 +73,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   title = 'Portfolio';
 
   isDarkMode = false;
+
+
+  private async _particlesInit(engine: Engine): Promise<void> {
+    console.log("tsparticles engine loaded", engine);
+    await loadSlim(engine);
+  }
 
   ngOnInit() {
 
