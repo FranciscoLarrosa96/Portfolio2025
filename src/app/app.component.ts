@@ -15,6 +15,9 @@ interface TypedChar {
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, AfterViewInit {
+  activeSection: string = '';
+
+
   particlesOptions: ISourceOptions = {
     background: {
       color: { value: getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim() }
@@ -84,6 +87,28 @@ export class AppComponent implements OnInit, AfterViewInit {
     AOS.init({
       duration: 1000,
       once: false,
+    });
+    this.scrollObserver();
+  }
+
+  scrollObserver() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.activeSection = entry.target.id;
+        }
+      });
+    }, options);
+
+    ['home', 'about', 'projects', 'contact'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
   }
 

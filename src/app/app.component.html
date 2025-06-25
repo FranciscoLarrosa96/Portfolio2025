@@ -1,12 +1,36 @@
 <header
     class="fixed w-full backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-white/10 z-50 p-4 flex justify-between items-center transition-colors duration-300">
     <div class="navigation" data-aos="zoom-in">
-        <nav class="space-x-4 text-text dark:text-white text-2xl navegacion">
-            <a href="#home" class="hover:text-hover dark:hover:text-main transition-colors">Inicio</a>
-            <a href="#about" class="hover:text-hover dark:hover:text-main transition-colors">Sobre mí</a>
-            <a href="#projects" class="hover:text-hover dark:hover:text-main transition-colors">Proyectos</a>
-            <a href="#contact" class="hover:text-hover dark:hover:text-main transition-colors mr-4">Contacto</a>
+        <nav class="space-x-4 text-2xl navegacion flex items-center">
+            <a href="#home" [ngClass]="{
+       'text-main font-semibold scale-105': activeSection === 'home',
+       'text-text dark:text-white': activeSection !== 'home'
+     }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main">
+                Inicio
+            </a>
+
+            <a href="#about" [ngClass]="{
+       'text-main font-semibold scale-105': activeSection === 'about',
+       'text-text dark:text-white': activeSection !== 'about'
+     }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main">
+                Sobre mí
+            </a>
+
+            <a href="#projects" [ngClass]="{
+       'text-main font-semibold scale-105': activeSection === 'projects',
+       'text-text dark:text-white': activeSection !== 'projects'
+     }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main">
+                Proyectos
+            </a>
+
+            <a href="#contact" [ngClass]="{
+       'text-main font-semibold scale-105': activeSection === 'contact',
+       'text-text dark:text-white': activeSection !== 'contact'
+     }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main mr-4">
+                Contacto
+            </a>
         </nav>
+
     </div>
     <div class="toggleMode">
         <button class="switchTheme" mat-icon-button (click)="this.toggleDarkMode()">
@@ -29,7 +53,8 @@
             style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
         </ng-particles>
         <div class="rounded-full overflow-hidden border-4 border-black dark:border-white shadow-lg">
-            <img src="assets/img/picture.avif" alt="francisco larrosa" class="h-[400px] object-cover imgFran" />
+            <img src="assets/img/picture.avif" alt="francisco larrosa" width="400" height="400" decoding="async"
+                class="h-[400px] object-cover imgFran" />
         </div>
 
         <h1 class="text-4xl font-bold text-center font-sans textGenerated">
@@ -41,47 +66,47 @@
     </section>
 
 
-<section
-  id="about"
-  class="min-h-screen flex items-center justify-center px-4 py-20 bg-gray-100 dark:bg-[#1a1a1a] text-text dark:text-white transition-colors duration-300"
->
-  <div
-    data-aos="fade-right"
-    class="max-w-4xl mx-auto text-center space-y-6"
-  >
-    <h2 class="text-4xl font-bold text-main">Sobre mí</h2>
+    <section id="about"
+        class="min-h-screen flex items-center justify-center px-4 py-20 bg-gray-100 dark:bg-[#1a1a1a] text-text dark:text-white transition-colors duration-300">
+        <div data-aos="fade-right" class="max-w-4xl mx-auto text-center space-y-6">
+            <h2 class="text-4xl font-bold text-main">Sobre mí</h2>
 
-    <p class="text-lg leading-relaxed">
-      ¡Hola! Soy <span class="font-semibold text-main">Francisco Larrosa</span>, un apasionado <span class="text-red-600 font-semibold">Frontend Developer</span> especializado en
-      <span class="text-red-700 font-semibold">Angular</span> y <span class="text-sky-500 font-semibold">Tailwind CSS</span>. Me encanta construir interfaces modernas, rápidas y accesibles que no solo funcionen bien, sino que también luzcan increíbles.
-    </p>
+            <p class="text-lg leading-relaxed">
+                ¡Hola! Soy <span class="font-semibold text-main">Francisco Larrosa</span>, un apasionado <span
+                    class="text-red-600 font-semibold">Frontend Developer</span> especializado en
+                <span class="text-red-700 font-semibold">Angular</span> y <span
+                    class="text-sky-500 font-semibold">Tailwind CSS</span>. Me encanta construir interfaces modernas,
+                rápidas y accesibles que no solo funcionen bien, sino que también luzcan increíbles.
+            </p>
 
-    <p class="text-lg leading-relaxed">
-      Hace más de <span class="font-semibold text-main">3 años</span> que me dedico al desarrollo frontend, creando experiencias web modernas, intuitivas y performantes. Estoy en constante mejora, aprendiendo día a día y perfeccionando mis habilidades con cada proyecto.
-    </p>
+            <p class="text-lg leading-relaxed">
+                Hace más de <span class="font-semibold text-main">3 años</span> que me dedico al desarrollo frontend,
+                creando experiencias web modernas, intuitivas y performantes. Estoy en constante mejora, aprendiendo día
+                a día y perfeccionando mis habilidades con cada proyecto.
+            </p>
 
-    <div class="flex flex-wrap justify-center gap-4 mt-6">
-      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-        Angular
-      </span>
-      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-        TypeScript
-      </span>
-      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-        Tailwind CSS
-      </span>
-      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-        HTML & SCSS
-      </span>
-      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-        Git & GitHub
-      </span>
-      <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-        Responsive Design
-      </span>
-    </div>
-  </div>
-</section>
+            <div class="flex flex-wrap justify-center gap-4 mt-6">
+                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+                    Angular
+                </span>
+                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+                    TypeScript
+                </span>
+                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+                    Tailwind CSS
+                </span>
+                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+                    HTML & SCSS
+                </span>
+                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+                    Git & GitHub
+                </span>
+                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
+                    Responsive Design
+                </span>
+            </div>
+        </div>
+    </section>
 
 
     <section
