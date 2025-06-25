@@ -16,7 +16,7 @@ interface TypedChar {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   activeSection: string = '';
-
+  language: 'es' | 'en' = 'es';
 
   particlesOptions: ISourceOptions = {
     background: {
@@ -56,7 +56,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   texts: TypedChar[][] = [
     [...'¡Hola! Soy Frontend Dev'].map(char => ({ char, class: 'text-main' })),
-    [...'Bienvenido a mi portfolio!'].map(char => ({ char, class: 'text-main' }))
+    [...'Hi! I am a Frontend Dev'].map(char => ({ char, class: 'text-main' })),
+    [...'Bienvenido a mi portfolio!'].map(char => ({ char, class: 'text-main' })),
+    [...'Welcome to my portfolio!'].map(char => ({ char, class: 'text-main' }))
   ];
 
   typedChars: TypedChar[] = [];
@@ -81,6 +83,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.updateDarkModeClass();
     this.particlesOptions = this.getParticlesOptions();
     this.typeLoop();
+    const savedLang = localStorage.getItem('lang') as 'es' | 'en';
+    if (savedLang) this.language = savedLang;
   }
 
   ngAfterViewInit(): void {
@@ -225,6 +229,11 @@ export class AppComponent implements OnInit, AfterViewInit {
       },
       detectRetina: true,
     };
+  }
+
+  toggleLanguage() {
+    this.language = this.language === 'es' ? 'en' : 'es';
+    localStorage.setItem('lang', this.language);
   }
 
 
