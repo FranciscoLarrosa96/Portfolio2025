@@ -4,20 +4,25 @@ import * as AOS from 'aos';
 import { NgParticlesModule } from 'ng-particles';
 import type { Container, ISourceOptions, Engine } from 'tsparticles-engine';
 import { loadSlim } from "tsparticles-slim";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import emailjs from '@emailjs/browser';
+
 interface TypedChar {
   char: string;
   class: string;
 }
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, NgParticlesModule],
+  imports: [CommonModule, NgParticlesModule,ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, AfterViewInit {
   activeSection: string = '';
   language: 'es' | 'en' = 'es';
-
+  contactForm!: FormGroup;
+  isSending = false;
+  sendSuccess: boolean | null = null;
   particlesOptions: ISourceOptions = {
     background: {
       color: { value: getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim() }
@@ -72,6 +77,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   isDarkMode = false;
   private container?: Container;
+
+  constructor(private fb: FormBuilder) {
+    this.contactForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', Validators.required],
+    });
+  }
 
   private async _particlesInit(engine: Engine): Promise<void> {
     await loadSlim(engine);
@@ -238,6 +251,29 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   onParticlesLoaded(container: Container): void {
     this.container = container;
+  }
+
+  sendEmail() {
+    if (this.contactForm.invalid) return;
+
+    this.isSending = true;
+    const serviceID = 'service_email_portfolio';
+    const templateID = 'template_portfolio'; 
+    const publicKey = 'jHuV3S8GpBcTctdLe'; 
+
+    emailjs.send(
+      serviceID,
+      templateID,
+      this.contactForm.value,
+      publicKey
+    ).then(() => {
+      this.sendSuccess = true;
+      this.contactForm.reset();
+    }).catch(() => {
+      this.sendSuccess = false;
+    }).finally(() => {
+      this.isSending = false;
+    });
   }
 
 }

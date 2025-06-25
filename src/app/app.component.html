@@ -193,12 +193,78 @@
 
 
 
-    <section id="contact"
-        class="min-h-screen bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center text-text dark:text-white transition-colors duration-500">
-        <div data-aos="fade-left" class="text-center">
-            <h2 class="text-3xl">Contacto</h2>
-        </div>
-    </section>
+    <!-- Contact Section -->
+<!-- Contact Section -->
+<section id="contact" class="py-20 px-4 sm:px-8 lg:px-20 bg-background dark:bg-black text-text dark:text-white">
+  <div
+    data-aos="fade-up"
+    data-aos-duration="1000"
+    class="max-w-2xl mx-auto text-center mb-12"
+  >
+    <h2 class="text-4xl font-bold text-main mb-2">Contacto</h2>
+    <p class="text-lg text-text dark:text-white/80">
+      ¿Tenés un proyecto en mente? ¡Hablemos!
+    </p>
+  </div>
+
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="sendEmail()"
+    data-aos="fade-up"
+    data-aos-delay="100"
+    data-aos-duration="1000"
+    class="space-y-6 max-w-2xl mx-auto p-6 bg-white/10 backdrop-blur-lg rounded-2xl border border-border-color shadow-lg"
+  >
+    <div>
+      <label class="block text-sm font-medium mb-1" for="name">Nombre</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Tu nombre"
+        class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1" for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="tuemail@email.com"
+        class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1" for="message">Mensaje</label>
+      <textarea
+        id="message"
+        formControlName="message"
+        rows="5"
+        placeholder="Escribime tu idea o consulta..."
+        class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition resize-none"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="isSending  || contactForm.invalid"
+      class="bg-main hover:bg-hover text-white font-semibold px-6 py-3 rounded-lg transition disabled:opacity-50"
+    >
+      {{ isSending ? 'Enviando...' : 'Enviar mensaje' }}
+    </button>
+
+    <div *ngIf="sendSuccess === true" class="text-green-500 font-medium text-center">
+      ¡Mensaje enviado con éxito!
+    </div>
+    <div *ngIf="sendSuccess === false" class="text-red-500 font-medium text-center">
+      Ocurrió un error al enviar 😢
+    </div>
+  </form>
+</section>
+
 
 </main>
 
