@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-prod": "ng build --configuration production --base-href \"/Portfolio2025/\"",
+    "postbuild-prod": "copy CNAME dist\\portfolio\\browser\\",
     "deploy": "npx angular-cli-ghpages --dir=dist/portfolio/browser/"
   },
   "private": true,
