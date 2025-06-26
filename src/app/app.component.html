@@ -201,9 +201,11 @@
     data-aos-duration="1000"
     class="max-w-2xl mx-auto text-center mb-12"
   >
-    <h2 class="text-4xl font-bold text-main mb-2">Contacto</h2>
+    <h2 class="text-4xl font-bold text-main mb-2">
+        {{language === 'es' ? 'Contacto' : 'Contact'}}
+    </h2>
     <p class="text-lg text-text dark:text-white/80">
-      ¿Tenés un proyecto en mente? ¡Hablemos!
+        {{language === 'es' ? '¿Tenés un proyecto en mente? ¡Hablemos!' : 'Got a project in mind? Let\'s talk!'}}
     </p>
   </div>
 
@@ -216,34 +218,40 @@
     class="space-y-6 max-w-2xl mx-auto p-6 bg-white/10 backdrop-blur-lg rounded-2xl border border-border-color shadow-lg"
   >
     <div>
-      <label class="block text-sm font-medium mb-1" for="name">Nombre</label>
+      <label class="block text-sm font-medium mb-1" for="name">
+        {{ language === 'es' ? 'Nombre' : 'Name' }}
+      </label>
       <input
         type="text"
         id="name"
         formControlName="name"
-        placeholder="Tu nombre"
+        placeholder="{{ language === 'es' ? 'Tu nombre' : 'Your name' }}"
         class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition"
       />
     </div>
 
     <div>
-      <label class="block text-sm font-medium mb-1" for="email">Email</label>
+      <label class="block text-sm font-medium mb-1" for="email">
+        {{ language === 'es' ? 'Correo electrónico' : 'Email' }}
+      </label>
       <input
         type="email"
         id="email"
         formControlName="email"
-        placeholder="tuemail@email.com"
+        placeholder="{{ language === 'es' ? 'Tu email' : 'Your email' }}"
         class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition"
       />
     </div>
 
     <div>
-      <label class="block text-sm font-medium mb-1" for="message">Mensaje</label>
+      <label class="block text-sm font-medium mb-1" for="message">
+        {{ language === 'es' ? 'Mensaje' : 'Message' }}
+      </label>
       <textarea
         id="message"
         formControlName="message"
         rows="5"
-        placeholder="Escribime tu idea o consulta..."
+        placeholder="{{ language === 'es' ? 'Escribe tu mensaje aquí...' : 'Write your message here...' }}"
         class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition resize-none"
       ></textarea>
     </div>
@@ -253,14 +261,14 @@
       [disabled]="isSending  || contactForm.invalid"
       class="bg-main hover:bg-hover text-white font-semibold px-6 py-3 rounded-lg transition disabled:opacity-50"
     >
-      {{ isSending ? 'Enviando...' : 'Enviar mensaje' }}
+      {{ isSending ? (language === 'es' ? 'Enviando...' : 'Sending...') : (language === 'es' ? 'Enviar mensaje' : 'Send message') }}
     </button>
 
     <div *ngIf="sendSuccess === true" class="text-green-500 font-medium text-center">
-      ¡Mensaje enviado con éxito!
+        {{ language === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!' }}
     </div>
     <div *ngIf="sendSuccess === false" class="text-red-500 font-medium text-center">
-      Ocurrió un error al enviar 😢
+      {{ language === 'es' ? 'Ocurrió un error al enviar 😢' : 'An error occurred while sending 😢' }}
     </div>
   </form>
 </section>
