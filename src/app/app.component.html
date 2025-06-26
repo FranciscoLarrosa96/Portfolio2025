@@ -155,15 +155,21 @@
                 : 'A sleek and modern landing page built with Angular, Tailwind CSS, and subtle animations for a strong online presence.' }}
             </p>
             <div class="flex flex-wrap gap-2 text-xs mb-4">
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular 19</span>
               <span class="bg-main/10 text-main px-2 py-1 rounded">SCSS</span>
               <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
               <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
             </div>
-            <a href="https://franciscolarrosa96.github.io/landingPageIvan/" target="_blank" rel="noopener noreferrer"
-              class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
-              {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
-            </a>
+            <div class="flex gap-2">
+              <a href="https://github.com/FranciscoLarrosa96/landingPageIvan" target="_blank" rel="noopener noreferrer"
+                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-main transition-colors text-sm">
+                GitHub
+              </a>
+              <a href="https://franciscolarrosa96.github.io/landingPageIvan/" target="_blank" rel="noopener noreferrer"
+                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
+                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -182,13 +188,47 @@
               <span class="bg-main/10 text-main px-2 py-1 rounded">CSS</span>
               <span class="bg-main/10 text-main px-2 py-1 rounded">JavaScript</span>
             </div>
-            <a href="https://franciscolarrosa96.github.io/ClinicaDeOjos/#home" target="_blank" rel="noopener noreferrer"
-              class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
-              {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
-            </a>
+            <div class="flex gap-2">
+              <a href="https://github.com/FranciscoLarrosa96/ClinicaDeOjos" target="_blank" rel="noopener noreferrer"
+                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-main transition-colors text-sm">
+                GitHub
+              </a>
+              <a href="https://franciscolarrosa96.github.io/ClinicaDeOjos/#home" target="_blank" rel="noopener noreferrer"
+                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
+                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+        <!-- Proyecto 3 - Dashboard Finanzas -->
+        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
+          <img src="assets/img/finanzas.avif" alt="Dashboard de Finanzas Personales" class="rounded-t-2xl w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Dashboard de Finanzas Personales</h3>
+            <p class="text-sm mb-4">
+              {{ language === 'es' 
+                ? 'Aplicación web para visualizar ingresos y gastos mensuales, con gráficos interactivos, filtros por categoría y diseño responsivo.' 
+                : 'Web app to track monthly income and expenses, featuring interactive charts, category filters, and a responsive layout.' }}
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs mb-4">
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular 19</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Recharts</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
+            </div>
+            <div class="flex gap-2">
+              <a href="https://github.com/FranciscoLarrosa96/finansasDashboard" target="_blank" rel="noopener noreferrer"
+                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/70 transition-colors text-sm">
+                GitHub
+              </a>
+              <a href="https://franciscolarrosa96.github.io/finansasDashboard/" target="_blank" rel="noopener noreferrer"
+                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
+                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
+              </a>
+            </div>
+          </div>
+        </div>
+        </div>
     </section>
 
 
