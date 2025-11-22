@@ -1,10 +1,22 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  Inject,
+  Renderer2,
+} from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import * as AOS from 'aos';
 import { NgParticlesModule } from 'ng-particles';
 import type { Container, ISourceOptions, Engine } from 'tsparticles-engine';
-import { loadSlim } from "tsparticles-slim";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { loadSlim } from 'tsparticles-slim';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import emailjs from '@emailjs/browser';
 
 interface TypedChar {
@@ -13,9 +25,9 @@ interface TypedChar {
 }
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, NgParticlesModule,ReactiveFormsModule],
+  imports: [CommonModule, NgParticlesModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, AfterViewInit {
   activeSection: string = '';
@@ -25,15 +37,21 @@ export class AppComponent implements OnInit, AfterViewInit {
   sendSuccess: boolean | null = null;
   particlesOptions: ISourceOptions = {
     background: {
-      color: { value: getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim() }
+      color: {
+        value: getComputedStyle(document.documentElement)
+          .getPropertyValue('--background-color')
+          .trim(),
+      },
     },
     fpsLimit: 60,
     particles: {
       color: {
-        value: getComputedStyle(document.documentElement).getPropertyValue('--main-color').trim()
+        value: getComputedStyle(document.documentElement)
+          .getPropertyValue('--main-color')
+          .trim(),
       },
       links: {
-        color: "#000000",
+        color: '#000000',
         distance: 150,
         enable: true,
         opacity: 0.5,
@@ -41,9 +59,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       },
       collisions: { enable: true },
       move: {
-        direction: "none",
+        direction: 'none',
         enable: true,
-        outModes: { default: "bounce" },
+        outModes: { default: 'bounce' },
         speed: 2,
       },
       number: {
@@ -51,7 +69,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         density: { enable: true, area: 800 },
       },
       opacity: { value: 0.7 },
-      shape: { type: "circle" },
+      shape: { type: 'circle' },
       size: { value: { min: 2, max: 6 } },
     },
     detectRetina: true,
@@ -60,10 +78,22 @@ export class AppComponent implements OnInit, AfterViewInit {
   particlesInit = this._particlesInit.bind(this);
 
   texts: TypedChar[][] = [
-    [...'¡Hola! Soy Frontend Dev'].map(char => ({ char, class: 'text-main' })),
-    [...'Hi! I am a Frontend Dev'].map(char => ({ char, class: 'text-main' })),
-    [...'Bienvenido a mi portfolio!'].map(char => ({ char, class: 'text-main' })),
-    [...'Welcome to my portfolio!'].map(char => ({ char, class: 'text-main' }))
+    [...'¡Hola! Soy Frontend Dev'].map((char) => ({
+      char,
+      class: 'text-main',
+    })),
+    [...'Hi! I am a Frontend Dev'].map((char) => ({
+      char,
+      class: 'text-main',
+    })),
+    [...'Bienvenido a mi portfolio!'].map((char) => ({
+      char,
+      class: 'text-main',
+    })),
+    [...'Welcome to my portfolio!'].map((char) => ({
+      char,
+      class: 'text-main',
+    })),
   ];
 
   typedChars: TypedChar[] = [];
@@ -71,14 +101,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   charIndex = 0;
   isDeleting = false;
 
-
-
   title = 'Portfolio';
 
   isDarkMode = false;
   private container?: Container;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private meta: Meta,
+    private titleService: Title,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
+  ) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -97,6 +131,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.typeLoop();
     const savedLang = localStorage.getItem('lang') as 'es' | 'en';
     if (savedLang) this.language = savedLang;
+
+    // Inicializar SEO
+    this.updateMetaTags();
+    this.addStructuredData();
   }
 
   ngAfterViewInit(): void {
@@ -111,18 +149,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.6
+      threshold: 0.6,
     };
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           this.activeSection = entry.target.id;
         }
       });
     }, options);
 
-    ['home', 'about', 'projects', 'contact'].forEach(id => {
+    ['home', 'about', 'projects', 'contact'].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -130,7 +168,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   configDarkMode() {
     // Detecta si el sistema está en modo oscuro
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
 
     // Si el usuario ya eligió un modo antes, respetalo
     const savedTheme = localStorage.getItem('theme');
@@ -163,13 +203,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       const el = document.getElementById('tsparticles') as HTMLElement;
       if (el) {
-        window.tsParticles.load('tsparticles', this.particlesOptions).then(container => {
-          this.container = container;
-        });
+        window.tsParticles
+          .load('tsparticles', this.particlesOptions)
+          .then((container) => {
+            this.container = container;
+          });
       }
     }, 0);
   }
-
 
   updateDarkModeClass(): void {
     const html = document.documentElement;
@@ -210,15 +251,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     return {
       background: {
-        color: { value: isDark ? "#000000" : "#ffffff" }
+        color: { value: isDark ? '#000000' : '#ffffff' },
       },
       fpsLimit: 60,
       particles: {
         color: {
-          value: rootStyles.getPropertyValue('--main-color').trim()
+          value: rootStyles.getPropertyValue('--main-color').trim(),
         },
         links: {
-          color: isDark ? "#ffffff" : "#000000",
+          color: isDark ? '#ffffff' : '#000000',
           distance: 150,
           enable: true,
           opacity: 0.5,
@@ -226,9 +267,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         },
         collisions: { enable: true },
         move: {
-          direction: "none",
+          direction: 'none',
           enable: true,
-          outModes: { default: "bounce" },
+          outModes: { default: 'bounce' },
           speed: 2,
         },
         number: {
@@ -236,7 +277,7 @@ export class AppComponent implements OnInit, AfterViewInit {
           density: { enable: true, area: 800 },
         },
         opacity: { value: 0.7 },
-        shape: { type: "circle" },
+        shape: { type: 'circle' },
         size: { value: { min: 2, max: 7 } },
       },
       detectRetina: true,
@@ -246,8 +287,107 @@ export class AppComponent implements OnInit, AfterViewInit {
   toggleLanguage() {
     this.language = this.language === 'es' ? 'en' : 'es';
     localStorage.setItem('lang', this.language);
+    this.updateMetaTags(); // Actualizar meta tags al cambiar idioma
   }
 
+  updateMetaTags() {
+    const lang = this.language;
+
+    // Actualizar atributo lang del HTML
+    this.document.documentElement.setAttribute('lang', lang);
+
+    // Textos según idioma
+    const content = {
+      es: {
+        title: 'Francisco Larrosa - Frontend Developer | Portfolio',
+        description:
+          'Desarrollador frontend especializado en Angular y Tailwind CSS. Más de 3 años de experiencia construyendo interfaces modernas, accesibles y de alto rendimiento. Portfolio profesional con proyectos destacados.',
+        ogTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
+        twitterTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
+      },
+      en: {
+        title: 'Francisco Larrosa - Frontend Developer | Portfolio',
+        description:
+          'Frontend developer specialized in Angular and Tailwind CSS. Over 3 years of experience building modern, accessible, and high-performance interfaces. Professional portfolio with featured projects.',
+        ogTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
+        twitterTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
+      },
+    };
+
+    const currentContent = content[lang];
+
+    // Actualizar título
+    this.titleService.setTitle(currentContent.title);
+
+    // Actualizar meta description
+    this.meta.updateTag({
+      name: 'description',
+      content: currentContent.description,
+    });
+
+    // Actualizar Open Graph
+    this.meta.updateTag({
+      property: 'og:title',
+      content: currentContent.ogTitle,
+    });
+    this.meta.updateTag({
+      property: 'og:description',
+      content: currentContent.description,
+    });
+    this.meta.updateTag({
+      property: 'og:locale',
+      content: lang === 'es' ? 'es_ES' : 'en_US',
+    });
+
+    // Actualizar Twitter Cards
+    this.meta.updateTag({
+      name: 'twitter:title',
+      content: currentContent.twitterTitle,
+    });
+    this.meta.updateTag({
+      name: 'twitter:description',
+      content: currentContent.description,
+    });
+  }
+
+  addStructuredData() {
+    const script = this.renderer.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Francisco Larrosa',
+      jobTitle: 'Frontend Developer',
+      url: 'https://franciscolarrosa.com',
+      sameAs: [
+        'https://github.com/FranciscoLarrosa96',
+        'https://www.linkedin.com/in/francisco-larrosa',
+      ],
+      knowsAbout: [
+        'Angular',
+        'TypeScript',
+        'Tailwind CSS',
+        'HTML',
+        'SCSS',
+        'JavaScript',
+        'Git',
+        'GitHub',
+        'Responsive Design',
+        'UX/UI Design',
+        'Docker',
+        'Frontend Development',
+        'Web Development',
+      ],
+      description:
+        'Desarrollador frontend especializado en Angular y Tailwind CSS con más de 3 años de experiencia construyendo interfaces modernas, accesibles y de alto rendimiento.',
+      alumniOf: {
+        '@type': 'Organization',
+        name: 'Frontend Developer',
+      },
+    });
+
+    this.renderer.appendChild(this.document.head, script);
+  }
 
   onParticlesLoaded(container: Container): void {
     this.container = container;
@@ -258,22 +398,20 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.isSending = true;
     const serviceID = 'service_email_portfolio';
-    const templateID = 'template_portfolio'; 
-    const publicKey = 'jHuV3S8GpBcTctdLe'; 
+    const templateID = 'template_portfolio';
+    const publicKey = 'jHuV3S8GpBcTctdLe';
 
-    emailjs.send(
-      serviceID,
-      templateID,
-      this.contactForm.value,
-      publicKey
-    ).then(() => {
-      this.sendSuccess = true;
-      this.contactForm.reset();
-    }).catch(() => {
-      this.sendSuccess = false;
-    }).finally(() => {
-      this.isSending = false;
-    });
+    emailjs
+      .send(serviceID, templateID, this.contactForm.value, publicKey)
+      .then(() => {
+        this.sendSuccess = true;
+        this.contactForm.reset();
+      })
+      .catch(() => {
+        this.sendSuccess = false;
+      })
+      .finally(() => {
+        this.isSending = false;
+      });
   }
-
 }

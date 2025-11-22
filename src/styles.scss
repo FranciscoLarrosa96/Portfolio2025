@@ -22,4 +22,17 @@ html {
     --border-color: #fcd6e2;
     --hover-color: #c6006d;
   }
+
+/* Utility class para contenido solo accesible por screen readers (SEO) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
   

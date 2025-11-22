@@ -73,6 +73,8 @@
                 <span [ngClass]="c.class">{{ c.char }}</span>
             </ng-container>
             <span class="animate-pulse">|</span>
+            <!-- Texto oculto para SEO -->
+            <span class="sr-only">Francisco Larrosa - Frontend Developer especializado en Angular y Tailwind CSS</span>
         </h1>
     </section>
 
@@ -200,28 +202,30 @@
             </div>
           </div>
         </div>
-        <!-- Proyecto 3 - Dashboard Finanzas -->
+        <!-- Proyecto 3 - BioMind -->
         <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
-          <img src="assets/img/finanzas.avif" alt="Dashboard de Finanzas Personales" class="rounded-t-2xl w-full h-56 object-cover">
+          <img src="assets/img/previa.avif" alt="BioMind" class="rounded-t-2xl w-full h-56 object-cover">
           <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Dashboard de Finanzas Personales</h3>
+            <h3 class="text-xl font-semibold mb-2">BioMind 🧬</h3>
             <p class="text-sm mb-4">
               {{ language === 'es' 
-                ? 'Aplicación web para visualizar ingresos y gastos mensuales, con gráficos interactivos, filtros por categoría y diseño responsivo.' 
-                : 'Web app to track monthly income and expenses, featuring interactive charts, category filters, and a responsive layout.' }}
+                ? 'Aplicación web inteligente que democratiza el acceso a la información médica. Utiliza IA de Google Gemini para convertir PDFs de análisis de laboratorio en explicaciones claras y comprensibles para cualquier persona.' 
+                : 'Intelligent web app that democratizes access to medical information. Uses Google Gemini AI to transform laboratory analysis PDFs into clear and understandable explanations for everyone.' }}
             </p>
             <div class="flex flex-wrap gap-2 text-xs mb-4">
               <span class="bg-main/10 text-main px-2 py-1 rounded">Angular 19</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">TypeScript</span>
               <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Recharts</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">Google Gemini AI</span>
+              <span class="bg-main/10 text-main px-2 py-1 rounded">AOS</span>
               <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
             </div>
             <div class="flex gap-2">
-              <a href="https://github.com/FranciscoLarrosa96/finansasDashboard" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/FranciscoLarrosa96/BioMind" target="_blank" rel="noopener noreferrer"
                 class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/70 transition-colors text-sm">
                 GitHub
               </a>
-              <a href="https://franciscolarrosa96.github.io/finansasDashboard/" target="_blank" rel="noopener noreferrer"
+              <a href="https://franciscolarrosa96.github.io/BioMind/" target="_blank" rel="noopener noreferrer"
                 class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
                 {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
               </a>
