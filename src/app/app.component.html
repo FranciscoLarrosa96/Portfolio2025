@@ -1,54 +1,111 @@
 <header
-    class="fixed w-full backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-white/10 z-50 p-4 flex justify-between items-center transition-colors duration-300">
-    <div class="navigation" data-aos="zoom-in">
-        <nav class="space-x-4 text-2xl navegacion flex items-center">
-            <a href="#home" [ngClass]="{
-               'text-main font-semibold scale-105': activeSection === 'home',
-               'text-text dark:text-white': activeSection !== 'home'
-             }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main">
-                {{ language === 'es' ? 'Inicio' : 'Home' }}
-            </a>
+    class="header-nav fixed w-full backdrop-blur-lg bg-white/40 dark:bg-black/40 border-b border-white/30 dark:border-white/10 z-50 transition-all duration-500 shadow-sm"
+    [class.scrolled]="isScrolled">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20 transition-all duration-300" [class.h-16]="isScrolled">
+            
+            <!-- Brand/Name -->
+            <div class="brand-name text-2xl font-bold tracking-tight" data-aos="fade-right">
+                <span class="text-gradient">FL</span>
+                <span class="text-text dark:text-white ml-1">Dev</span>
+            </div>
 
-            <a href="#about" [ngClass]="{
-               'text-main font-semibold scale-105': activeSection === 'about',
-               'text-text dark:text-white': activeSection !== 'about'
-             }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main">
-                {{ language === 'es' ? 'Sobre mí' : 'About me' }}
-            </a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="#home" 
+                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'home'">
+                    <span>{{ language === 'es' ? 'Inicio' : 'Home' }}</span>
+                </a>
 
-            <a href="#projects" [ngClass]="{
-               'text-main font-semibold scale-105': activeSection === 'projects',
-               'text-text dark:text-white': activeSection !== 'projects'
-             }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main">
-                {{ language === 'es' ? 'Proyectos' : 'Projects' }}
-            </a>
+                <a href="#about" 
+                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'about'">
+                    <span>{{ language === 'es' ? 'Sobre mí' : 'About' }}</span>
+                </a>
 
-            <a href="#contact" [ngClass]="{
-               'text-main font-semibold scale-105': activeSection === 'contact',
-               'text-text dark:text-white': activeSection !== 'contact'
-             }" class="transition-all duration-300 ease-in-out hover:text-hover dark:hover:text-main mr-4">
-                {{ language === 'es' ? 'Contacto' : 'Contact' }}
-            </a>
-        </nav>
-    </div>
+                <a href="#projects" 
+                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'projects'">
+                    <span>{{ language === 'es' ? 'Proyectos' : 'Projects' }}</span>
+                </a>
 
-    <!-- Botones: idioma + dark mode -->
-    <div class="flex items-center space-x-4">
-        <button (click)="toggleLanguage()"
-            class="w-10 h-6 flex items-center justify-center transition-colors duration-300" aria-label="Cambiar idioma">
-            <img [src]="language === 'es' ? 'assets/img/us.webp' : 'assets/img/es.webp'"
-                [alt]="language === 'es' ? 'Switch to English' : 'Cambiar a Español'" class="w-6 h-auto" />
-        </button>
+                <a href="#contact" 
+                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'contact'">
+                    <span>{{ language === 'es' ? 'Contacto' : 'Contact' }}</span>
+                </a>
+            </nav>
 
-        <div class="toggleMode">
-            <button class="switchTheme" mat-icon-button (click)="toggleDarkMode()" aria-label="Cambiar a modo claro"
-  [attr.aria-label]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
-                @if(isDarkMode){
-                <i class="fa-solid fa-sun text-white lg:text-3xl pr-4 md:text-2xl sm:text-xl"></i>
-                }@else {
-                <i class="fa-solid fa-moon lg:text-3xl pr-4 md:text-2xl sm:text-xl"></i>
-                }
-            </button>
+            <!-- Right Side Controls -->
+            <div class="flex items-center space-x-3 lg:space-x-4">
+                <!-- Language Toggle -->
+                <button (click)="toggleLanguage()"
+                    class="control-btn p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300"
+                    aria-label="Cambiar idioma">
+                    <img [src]="language === 'es' ? 'assets/img/us.webp' : 'assets/img/es.webp'"
+                        [alt]="language === 'es' ? 'Switch to English' : 'Cambiar a Español'" 
+                        class="w-6 h-6 object-cover rounded" />
+                </button>
+
+                <!-- Dark Mode Toggle -->
+                <button class="control-btn p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300" 
+                        (click)="toggleDarkMode()" 
+                        [attr.aria-label]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
+                    @if(isDarkMode){
+                        <i class="fa-solid fa-sun text-yellow-400 text-xl lg:text-2xl"></i>
+                    }@else {
+                        <i class="fa-solid fa-moon text-slate-700 dark:text-white text-xl lg:text-2xl"></i>
+                    }
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button (click)="toggleMobileMenu()" 
+                        class="md:hidden control-btn p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300"
+                        aria-label="Menú">
+                    <i class="fa-solid text-xl transition-transform duration-300"
+                       [class.fa-bars]="!isMobileMenuOpen"
+                       [class.fa-times]="isMobileMenuOpen"
+                       [class.rotate-90]="isMobileMenuOpen"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden overflow-hidden transition-all duration-500 ease-in-out"
+             [class.max-h-0]="!isMobileMenuOpen"
+             [class.max-h-96]="isMobileMenuOpen"
+             [class.opacity-0]="!isMobileMenuOpen"
+             [class.opacity-100]="isMobileMenuOpen">
+            <nav class="flex flex-col space-y-1 py-4 border-t border-white/20 dark:border-white/10">
+                <a href="#home" 
+                   (click)="closeMobileMenu()"
+                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'home'">
+                    {{ language === 'es' ? 'Inicio' : 'Home' }}
+                </a>
+
+                <a href="#about" 
+                   (click)="closeMobileMenu()"
+                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'about'">
+                    {{ language === 'es' ? 'Sobre mí' : 'About' }}
+                </a>
+
+                <a href="#projects" 
+                   (click)="closeMobileMenu()"
+                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'projects'">
+                    {{ language === 'es' ? 'Proyectos' : 'Projects' }}
+                </a>
+
+                <a href="#contact" 
+                   (click)="closeMobileMenu()"
+                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+                   [class.active]="activeSection === 'contact'">
+                    {{ language === 'es' ? 'Contacto' : 'Contact' }}
+                </a>
+            </nav>
         </div>
     </div>
 </header>
@@ -64,7 +121,7 @@
             style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
         </ng-particles>
         <div class="rounded-full overflow-hidden border-4 border-black dark:border-white shadow-lg">
-            <img src="assets/img/picture.avif" alt="francisco larrosa" width="400" height="400" decoding="async"
+            <img src="assets/img/francisco.avif" alt="francisco larrosa" width="400" height="400" decoding="async"
                 class="h-[400px] object-cover imgFran" />
         </div>
 

@@ -35,6 +35,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   contactForm!: FormGroup;
   isSending = false;
   sendSuccess: boolean | null = null;
+  isScrolled = false;
+  isMobileMenuOpen = false;
   particlesOptions: ISourceOptions = {
     background: {
       color: {
@@ -111,7 +113,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private meta: Meta,
     private titleService: Title,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
@@ -143,6 +145,21 @@ export class AppComponent implements OnInit, AfterViewInit {
       once: false,
     });
     this.scrollObserver();
+    this.setupScrollListener();
+  }
+
+  setupScrollListener() {
+    window.addEventListener('scroll', () => {
+      this.isScrolled = window.scrollY > 50;
+    });
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
   }
 
   scrollObserver() {
@@ -169,7 +186,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   configDarkMode() {
     // Detecta si el sistema está en modo oscuro
     const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
+      '(prefers-color-scheme: dark)',
     ).matches;
 
     // Si el usuario ya eligió un modo antes, respetalo

@@ -1,5 +1,91 @@
 @use '../assets/styles/responsive.scss' as *;
 
+// Header Styles
+.header-nav {
+    &.scrolled {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        @apply bg-white/60 dark:bg-black/60;
+    }
+}
+
+// Brand Name
+.brand-name {
+    cursor: default;
+    user-select: none;
+    
+    .text-gradient {
+        @apply bg-gradient-to-br from-main to-secondary;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+    }
+
+    @include mobile {
+        font-size: 1.25rem;
+    }
+}
+
+// Navigation Links
+.nav-link {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        @apply bg-gradient-to-r from-main to-secondary;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+    }
+
+    &:hover {
+        @apply text-hover;
+        
+        &::after {
+            width: 80%;
+        }
+    }
+
+    &.active {
+        @apply text-main;
+        font-weight: 600;
+        
+        &::after {
+            width: 80%;
+        }
+    }
+}
+
+// Mobile Navigation
+.mobile-nav-link {
+    &:hover {
+        @apply bg-white/30 dark:bg-white/10 text-hover;
+    }
+
+    &.active {
+        @apply bg-white/40 dark:bg-white/15 text-main;
+        font-weight: 600;
+    }
+}
+
+// Control Buttons
+.control-btn {
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+// Responsive Image
 .imgFran {
     @include mobile {
         width: 170px;
@@ -17,6 +103,7 @@
     }
 }
 
+// Text Generated
 .textGenerated {
     @include mobile {
         font-size: 1.2rem;
@@ -36,32 +123,5 @@
     @include desktop {
         font-size: 2.25rem;
         margin-top: 25px;
-    }
-}
-
-.navegacion {
-    @include mobile {
-        font-size: 1rem;
-    }
-
-
-    @include mobile-m {
-        font-size: 0.8rem;
-    }
-
-    @include mobile-s {
-        font-size: 0.6rem;
-    }
-
-    @include tablet {
-        font-size: 1.4rem;
-    }
-
-    @include laptop {
-        font-size: 1.6rem;
-    }
-
-    @include desktop {
-        font-size: 1.8rem;
     }
 }
