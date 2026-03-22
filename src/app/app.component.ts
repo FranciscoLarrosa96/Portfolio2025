@@ -368,9 +368,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   addStructuredData() {
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
+    // Person Schema
+    const personScript = this.renderer.createElement('script');
+    personScript.type = 'application/ld+json';
+    personScript.text = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Francisco Larrosa',
@@ -403,7 +404,25 @@ export class AppComponent implements OnInit, AfterViewInit {
       },
     });
 
-    this.renderer.appendChild(this.document.head, script);
+    // WebSite Schema
+    const websiteScript = this.renderer.createElement('script');
+    websiteScript.type = 'application/ld+json';
+    websiteScript.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Francisco Larrosa Portfolio',
+      url: 'https://franciscolarrosa.com',
+      description:
+        'Portfolio profesional de Francisco Larrosa, desarrollador frontend especializado en Angular y Tailwind CSS',
+      author: {
+        '@type': 'Person',
+        name: 'Francisco Larrosa',
+      },
+      inLanguage: ['es', 'en'],
+    });
+
+    this.renderer.appendChild(this.document.head, personScript);
+    this.renderer.appendChild(this.document.head, websiteScript);
   }
 
   onParticlesLoaded(container: Container): void {
