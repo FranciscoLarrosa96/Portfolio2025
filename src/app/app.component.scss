@@ -103,6 +103,72 @@
     }
 }
 
+// Technologies Marquee
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+
+  &:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2.5rem;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, background 0.3s ease;
+  cursor: default;
+  min-width: 90px;
+
+  img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: grayscale(30%);
+    transition: filter 0.3s ease;
+  }
+
+  span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    @apply text-text dark:text-white/70;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.1);
+
+    img {
+      filter: grayscale(0%);
+    }
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 // Text Generated
 .textGenerated {
     @include mobile {
