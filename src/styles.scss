@@ -21,7 +21,61 @@ html {
     --text-color: #27272a;
     --border-color: #fcd6e2;
     --hover-color: #c6006d;
+
+    /* Semantic tokens for light/dark text, surfaces and hairlines.
+       Component styles read these instead of Tailwind's `dark:` variant:
+       Angular's emulated view encapsulation attribute-scopes every class in a
+       selector chain, including ancestor classes like `.dark` on <html> --
+       which never carries that attribute, so `dark:` utilities applied via
+       @apply inside a component stylesheet silently never match. */
+    --surface: #ffffff;
+    --text-primary: #16181d;
+    --text-muted: rgba(22, 24, 29, 0.78);
+    --text-soft: rgba(22, 24, 29, 0.68);
+    --hairline: rgba(20, 16, 24, 0.12);
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
+
+.dark {
+    --background-color: #0e0e10;
+    --surface: #17171a;
+    --text-primary: #f4f2f5;
+    --text-muted: rgba(244, 242, 245, 0.8);
+    --text-soft: rgba(244, 242, 245, 0.58);
+    --hairline: rgba(255, 255, 255, 0.14);
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema:
+   colapsa cualquier animación/transición CSS (marquee, cursor, hover, menú) a
+   prácticamente instantánea sin tener que gatear cada regla una por una. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Foco de teclado visible y consistente en toda la app (botones, links,
+   inputs). Vive en el global stylesheet a propósito: si estuviera dentro del
+   SCSS de un componente y usara `:focus-visible` sobre selectores heredados
+   de Tailwind, cae en el mismo problema de encapsulamiento que los `dark:`. */
+a,
+button,
+input,
+textarea,
+[tabindex] {
+  &:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
 
 /* Utility class para contenido solo accesible por screen readers (SEO) */
 .sr-only {

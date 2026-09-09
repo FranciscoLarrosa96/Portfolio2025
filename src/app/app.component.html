@@ -1,519 +1,612 @@
+<div class="scroll-progress" aria-hidden="true"></div>
+
 <header
-    class="header-nav fixed w-full backdrop-blur-lg bg-white/40 dark:bg-black/40 border-b border-white/30 dark:border-white/10 z-50 transition-all duration-500 shadow-sm"
-    [class.scrolled]="isScrolled">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20 transition-all duration-300" [class.h-16]="isScrolled">
-            
-            <!-- Brand/Name -->
-            <div class="brand-name text-2xl font-bold tracking-tight" data-aos="fade-right">
-                <span class="text-gradient">FL</span>
-                <span class="text-text dark:text-white ml-1">Dev</span>
-            </div>
+  class="header-nav fixed w-full backdrop-blur-lg bg-white/70 dark:bg-black/60 border-b border-border/60 dark:border-white/10 z-50 transition-all duration-300 shadow-sm"
+  [class.scrolled]="isScrolled"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+      class="flex justify-between items-center h-20 transition-all duration-300"
+      [class.h-16]="isScrolled"
+    >
+      <!-- Brand/Name -->
+      <div class="brand-name text-2xl tracking-tight">
+        <span class="text-main">Francisco</span>
+        <span class="text-text dark:text-white ml-1">Larrosa</span>
+      </div>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <a href="#home" 
-                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'home'">
-                    <span>{{ language === 'es' ? 'Inicio' : 'Home' }}</span>
-                </a>
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+        <a
+          href="#home"
+          class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'home'"
+        >
+          <span>{{ language === "es" ? "Inicio" : "Home" }}</span>
+        </a>
 
-                <a href="#about" 
-                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'about'">
-                    <span>{{ language === 'es' ? 'Sobre mí' : 'About' }}</span>
-                </a>
+        <a
+          href="#about"
+          class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'about'"
+        >
+          <span>{{ language === "es" ? "Sobre mí" : "About" }}</span>
+        </a>
 
-                <a href="#projects" 
-                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'projects'">
-                    <span>{{ language === 'es' ? 'Proyectos' : 'Projects' }}</span>
-                </a>
+        <a
+          href="#projects"
+          class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'projects'"
+        >
+          <span>{{ language === "es" ? "Proyectos" : "Projects" }}</span>
+        </a>
 
-                <a href="#contact" 
-                   class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'contact'">
-                    <span>{{ language === 'es' ? 'Contacto' : 'Contact' }}</span>
-                </a>
-            </nav>
+        <a
+          href="#contact"
+          class="nav-link relative px-4 py-2 text-base lg:text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'contact'"
+        >
+          <span>{{ language === "es" ? "Contacto" : "Contact" }}</span>
+        </a>
+      </nav>
 
-            <!-- Right Side Controls -->
-            <div class="flex items-center space-x-3 lg:space-x-4">
-                <!-- Language Toggle -->
-                <button (click)="toggleLanguage()"
-                    class="control-btn p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300"
-                    aria-label="Cambiar idioma">
-                    <img [src]="language === 'es' ? 'assets/img/us.webp' : 'assets/img/es.webp'"
-                        [alt]="language === 'es' ? 'Switch to English' : 'Cambiar a Español'" 
-                        class="w-6 h-6 object-cover rounded" />
-                </button>
+      <!-- Right Side Controls -->
+      <div class="flex items-center space-x-3 lg:space-x-4">
+        <!-- Language Toggle -->
+        <button
+          (click)="toggleLanguage()"
+          class="control-btn p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300"
+          aria-label="Cambiar idioma"
+        >
+          <img
+            [src]="
+              language === 'es' ? 'assets/img/us.webp' : 'assets/img/es.webp'
+            "
+            [alt]="
+              language === 'es' ? 'Switch to English' : 'Cambiar a Español'
+            "
+            class="w-6 h-6 object-cover rounded"
+          />
+        </button>
 
-                <!-- Dark Mode Toggle -->
-                <button class="control-btn p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300" 
-                        (click)="toggleDarkMode()" 
-                        [attr.aria-label]="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
-                    @if(isDarkMode){
-                        <i class="fa-solid fa-sun text-yellow-400 text-xl lg:text-2xl"></i>
-                    }@else {
-                        <i class="fa-solid fa-moon text-slate-700 dark:text-white text-xl lg:text-2xl"></i>
-                    }
-                </button>
+        <!-- Dark Mode Toggle -->
+        <button
+          class="control-btn p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300"
+          (click)="toggleDarkMode()"
+          [attr.aria-label]="
+            isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
+          "
+        >
+          @if (isDarkMode) {
+            <i class="fa-solid fa-sun text-main text-xl lg:text-2xl"></i>
+          } @else {
+            <i
+              class="fa-solid fa-moon text-text dark:text-white text-xl lg:text-2xl"
+            ></i>
+          }
+        </button>
 
-                <!-- Mobile Menu Button -->
-                <button (click)="toggleMobileMenu()" 
-                        class="md:hidden control-btn p-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300"
-                        aria-label="Menú">
-                    <i class="fa-solid text-xl transition-transform duration-300"
-                       [class.fa-bars]="!isMobileMenuOpen"
-                       [class.fa-times]="isMobileMenuOpen"
-                       [class.rotate-90]="isMobileMenuOpen"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu md:hidden overflow-hidden transition-all duration-500 ease-in-out"
-             [class.max-h-0]="!isMobileMenuOpen"
-             [class.max-h-96]="isMobileMenuOpen"
-             [class.opacity-0]="!isMobileMenuOpen"
-             [class.opacity-100]="isMobileMenuOpen">
-            <nav class="flex flex-col space-y-1 py-4 border-t border-white/20 dark:border-white/10">
-                <a href="#home" 
-                   (click)="closeMobileMenu()"
-                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'home'">
-                    {{ language === 'es' ? 'Inicio' : 'Home' }}
-                </a>
-
-                <a href="#about" 
-                   (click)="closeMobileMenu()"
-                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'about'">
-                    {{ language === 'es' ? 'Sobre mí' : 'About' }}
-                </a>
-
-                <a href="#projects" 
-                   (click)="closeMobileMenu()"
-                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'projects'">
-                    {{ language === 'es' ? 'Proyectos' : 'Projects' }}
-                </a>
-
-                <a href="#contact" 
-                   (click)="closeMobileMenu()"
-                   class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
-                   [class.active]="activeSection === 'contact'">
-                    {{ language === 'es' ? 'Contacto' : 'Contact' }}
-                </a>
-            </nav>
-        </div>
+        <!-- Mobile Menu Button -->
+        <button
+          (click)="toggleMobileMenu()"
+          class="md:hidden control-btn p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300"
+          aria-label="Menú"
+        >
+          <i
+            class="fa-solid text-xl transition-transform duration-300"
+            [class.fa-bars]="!isMobileMenuOpen"
+            [class.fa-times]="isMobileMenuOpen"
+            [class.rotate-90]="isMobileMenuOpen"
+          ></i>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div
+      class="mobile-menu md:hidden grid transition-[grid-template-rows] duration-300 ease-in-out"
+      [style.gridTemplateRows]="isMobileMenuOpen ? '1fr' : '0fr'"
+    >
+      <nav
+        class="overflow-hidden flex flex-col space-y-1 border-t border-border/60 dark:border-white/10 transition-[padding] duration-300 ease-in-out"
+        [class.py-4]="isMobileMenuOpen"
+      >
+        <a
+          href="#home"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'home'"
+        >
+          {{ language === "es" ? "Inicio" : "Home" }}
+        </a>
+
+        <a
+          href="#about"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'about'"
+        >
+          {{ language === "es" ? "Sobre mí" : "About" }}
+        </a>
+
+        <a
+          href="#projects"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'projects'"
+        >
+          {{ language === "es" ? "Proyectos" : "Projects" }}
+        </a>
+
+        <a
+          href="#contact"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300 text-text dark:text-white"
+          [class.active]="activeSection === 'contact'"
+        >
+          {{ language === "es" ? "Contacto" : "Contact" }}
+        </a>
+      </nav>
+    </div>
+  </div>
 </header>
 
+<div
+  id="scroll-sentinel"
+  aria-hidden="true"
+  style="position: absolute; top: 0; height: 1px; width: 1px"
+></div>
 
-
-
-<main class="scroll-smooth" >
-    <section 
-        class="min-h-screen flex flex-col items-center justify-center gap-6  text-text dark:text-white transition-colors duration-300" id="home">
-        <ng-particles #particlesRef [id]="'tsparticles'" [options]="particlesOptions" [particlesInit]="particlesInit"
-            (particlesLoaded)="onParticlesLoaded($event)"
-            style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -10; pointer-events: none;">
-        </ng-particles>
-        <div class="rounded-full overflow-hidden border-4 border-black dark:border-white shadow-lg">
-            <img src="assets/img/francisco.jpeg" alt="francisco larrosa" width="400" height="400" decoding="async"
-                class="h-[400px] object-cover imgFran" />
-        </div>
-
-        <h1 class="text-4xl font-bold text-center font-sans textGenerated">
-            <ng-container *ngFor="let c of typedChars">
-                <span [ngClass]="c.class">{{ c.char }}</span>
-            </ng-container>
-            <span class="animate-pulse">|</span>
-            <!-- Texto oculto para SEO -->
-            <span class="sr-only">Francisco Larrosa - Frontend Developer especializado en Angular y Tailwind CSS</span>
+<main
+  class="scroll-smooth bg-background dark:bg-[#0e0e10] text-text dark:text-white transition-colors duration-300"
+>
+  <!-- Hero -->
+  <section id="home" class="hero-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hero-grid">
+      <div>
+        <p class="eyebrow" data-reveal>
+          {{ language === "es" ? "Frontend Developer" : "Frontend Developer" }}
+        </p>
+        <h1 class="hero-title" data-reveal>
+          @if (language === "es") {
+            Interfaces claras,<br /><span class="accent">código cuidado</span>.
+          } @else {
+            Clear interfaces,<br /><span class="accent">careful code</span>.
+          }
         </h1>
-    </section>
+        <p class="hero-lede" data-reveal>
+          {{
+            language === "es"
+              ? "Construyo productos web con Angular 22 y Tailwind CSS: rápidos, accesibles y con atención al detalle. Más de 4 años llevando ideas a interfaces reales."
+              : "I build web products with Angular 22 and Tailwind CSS: fast, accessible, and detail-oriented. Over 4 years turning ideas into real interfaces."
+          }}
+          <span class="sr-only"
+            >Francisco Larrosa - Frontend Developer especializado en Angular y
+            Tailwind CSS</span
+          >
+        </p>
+        <div class="hero-cta" data-reveal>
+          <a href="#projects" class="btn btn-primary">
+            {{ language === "es" ? "Ver proyectos" : "View projects" }}
+          </a>
+          <a
+            href="assets/Curriculum_Francisco_Larrosa.pdf"
+            download="Francisco_Larrosa_CV.pdf"
+            class="btn btn-ghost"
+          >
+            <i class="fa-solid fa-download"></i>
+            {{ language === "es" ? "Descargar CV" : "Download CV" }}
+          </a>
+        </div>
+      </div>
+      <div class="hero-portrait-wrap" data-reveal>
+        <img
+          src="assets/img/francisco.jpeg"
+          alt="Francisco Larrosa"
+          width="480"
+          height="600"
+          decoding="async"
+          class="hero-portrait"
+        />
+        <div class="hero-tag">
+          <span class="n">4+</span>
+          <span class="l">{{
+            language === "es" ? "Años de experiencia" : "Years of experience"
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-
-    <section id="about"
-        class="min-h-screen flex items-center justify-center px-4 py-20 bg-gray-100 dark:bg-[#1a1a1a] text-text dark:text-white transition-colors duration-300">
-        <div data-aos="fade-right" class="max-w-4xl mx-auto text-center space-y-6">
-            <h2 class="text-4xl font-bold text-main">
-                {{ language === 'es' ? 'Sobre mí' : 'About me' }}
-            </h2>
-
-            <p class="text-lg leading-relaxed">
-                {{ language === 'es' ? '¡Hola! Soy' : 'Hi! I am'}} <span class="font-semibold text-main">Francisco
-                    Larrosa</span>, {{ language === 'es' ? 'un apasionado' : 'a passionate'}} <span
-                    class="text-red-600 font-semibold">Frontend Developer</span>
-                {{ language === 'es' ? 'especializado en' : 'specialized in' }}
-                <span class="text-red-700 font-semibold">Angular</span> y <span
-                    class="text-sky-500 font-semibold">Tailwind CSS</span>.
-                    {{language === 'es' ? 'Me encanta construir interfaces modernas, rápidas y accesibles que no solo funcionen bien, sino que también luzcan increíbles.' : 'I love building modern, fast, and accessible interfaces that not only work well but also look amazing.'}}
-            </p>
-
-            <p class="text-lg leading-relaxed">
-              <span class="font-semibold text-main">
-                {{ language === 'es' ? 'Más de 3 años' : 'Over 3 years' }}
+  <!-- Sobre mí -->
+  <section id="about" class="about-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 about-grid">
+      <div data-reveal>
+        <p class="kicker">{{ language === "es" ? "Sobre mí" : "About" }}</p>
+      </div>
+      <div class="about-body">
+        <p data-reveal>
+          {{ language === "es" ? "¡Hola! Soy" : "Hi! I am" }}
+          <strong>Francisco Larrosa</strong>,
+          {{
+            language === "es"
+              ? "desarrollador frontend especializado en"
+              : "a frontend developer specialized in"
+          }}
+          <button
+            type="button"
+            class="term"
+            [class.is-open]="openTerm === 'ng22'"
+            [attr.aria-expanded]="openTerm === 'ng22'"
+            aria-controls="term-panel-ng22"
+            (click)="toggleTerm('ng22', $event)"
+          >
+            Angular 22
+            <i class="fa-solid fa-circle-info term-icon" aria-hidden="true"></i>
+          </button>, TypeScript {{ language === "es" ? "y" : "and" }}
+          <strong>Tailwind CSS</strong>.
+          {{
+            language === "es"
+              ? "Me encanta construir interfaces modernas, rápidas y accesibles que no solo funcionen bien, sino que también luzcan increíbles."
+              : "I love building modern, fast, and accessible interfaces that not only work well but also look amazing."
+          }}
+          <span
+            class="term-reveal"
+            id="term-panel-ng22"
+            [style.gridTemplateRows]="openTerm === 'ng22' ? '1fr' : '0fr'"
+          >
+            <span class="term-reveal-inner">
+              <span class="term-reveal-content">
+                {{
+                  language === "es"
+                    ? "La última versión mayor del framework, con Signals y el nuevo control flow como estándar."
+                    : "The framework's latest major version, with Signals and the new control flow as the default."
+                }}
               </span>
-              {{
-                language === 'es'
-                  ? 'de experiencia en desarrollo frontend, creando experiencias digitales modernas, intuitivas y de alto rendimiento. Me enfoco en escribir código limpio, accesible y escalable,          mientras evoluciono constantemente y llevo cada proyecto al siguiente nivel.'
-                  : 'of experience in frontend development, crafting modern, intuitive, and high-performance digital experiences. I focus on writing clean, accessible, and scalable code, constantly           evolving and taking each project to the next level.'
-              }}
-            </p>
+            </span>
+          </span>
+        </p>
+        <p data-reveal style="transition-delay: 80ms">
+          <strong>{{
+            language === "es" ? "Más de 4 años" : "Over 4 years"
+          }}</strong>
+          {{
+            language === "es"
+              ? "de experiencia desarrollando, manteniendo y modernizando aplicaciones Angular en producción (v14 a v22):"
+              : "of experience developing, maintaining, and modernizing production Angular applications (v14 through v22):"
+          }}
 
+          <button
+            type="button"
+            class="term"
+            [class.is-open]="openTerm === 'standalone'"
+            [attr.aria-expanded]="openTerm === 'standalone'"
+            aria-controls="term-panel-standalone"
+            (click)="toggleTerm('standalone', $event)"
+          >
+            Standalone Components
+            <i class="fa-solid fa-circle-info term-icon" aria-hidden="true"></i>
+          </button>,
+          <button
+            type="button"
+            class="term"
+            [class.is-open]="openTerm === 'signals'"
+            [attr.aria-expanded]="openTerm === 'signals'"
+            aria-controls="term-panel-signals"
+            (click)="toggleTerm('signals', $event)"
+          >
+            Signals
+            <i class="fa-solid fa-circle-info term-icon" aria-hidden="true"></i>
+          </button>
+          {{ language === "es" ? "y" : "and" }}
+          <button
+            type="button"
+            class="term"
+            [class.is-open]="openTerm === 'ssr'"
+            [attr.aria-expanded]="openTerm === 'ssr'"
+            aria-controls="term-panel-ssr"
+            (click)="toggleTerm('ssr', $event)"
+          >
+            Server-Side Rendering
+            <i class="fa-solid fa-circle-info term-icon" aria-hidden="true"></i>
+          </button>.
+          {{
+            language === "es"
+              ? "Escribo código limpio, accesible y escalable, respaldado por testing unitario."
+              : "I write clean, accessible, and scalable code backed by unit testing."
+          }}
 
-
-            <div class="flex flex-wrap justify-center gap-4 mt-6">
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    Angular
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    TypeScript
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    Tailwind CSS
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    HTML & SCSS
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    Git & GitHub
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    Responsive Design
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    UX/UI Design
-                </span>
-                <span class="bg-main/10 text-main px-4 py-2 rounded-full font-medium">
-                    Docker
-                </span>
-            </div>
-
-            <!-- Botón de descarga de CV -->
-            <div class="mt-8 flex justify-center" data-aos="fade-up">
-                <a href="assets/Curriculum_Francisco_Larrosa.pdf" download="Francisco_Larrosa_CV.pdf"
-                    class="inline-flex items-center gap-3 bg-main hover:bg-hover text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                    <i class="fa-solid fa-download text-xl"></i>
-                    <span class="text-lg">
-                        {{ language === 'es' ? 'Descargar CV' : 'Download Resume' }}
-                    </span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Technologies Marquee -->
-    <section class="py-12 bg-background dark:bg-black overflow-hidden border-y border-border dark:border-white/10">
-      <div class="mb-6 text-center" data-aos="fade-up">
-        <h2 class="text-2xl font-bold text-main">
-          {{ language === 'es' ? 'Tecnologías' : 'Technologies' }}
-        </h2>
+          <span
+            class="term-reveal"
+            id="term-panel-standalone"
+            [style.gridTemplateRows]="openTerm === 'standalone' ? '1fr' : '0fr'"
+          >
+            <span class="term-reveal-inner">
+              <span class="term-reveal-content">
+                {{
+                  language === "es"
+                    ? "Componentes Angular sin NgModules: arquitectura más simple y árboles de dependencias explícitos."
+                    : "Angular components without NgModules: simpler architecture and explicit dependency trees."
+                }}
+              </span>
+            </span>
+          </span>
+          <span
+            class="term-reveal"
+            id="term-panel-signals"
+            [style.gridTemplateRows]="openTerm === 'signals' ? '1fr' : '0fr'"
+          >
+            <span class="term-reveal-inner">
+              <span class="term-reveal-content">
+                {{
+                  language === "es"
+                    ? "El sistema de reactividad de Angular: estado granular sin Zone.js ni suscripciones manuales."
+                    : "Angular's reactivity system: granular state without Zone.js or manual subscriptions."
+                }}
+              </span>
+            </span>
+          </span>
+          <span
+            class="term-reveal"
+            id="term-panel-ssr"
+            [style.gridTemplateRows]="openTerm === 'ssr' ? '1fr' : '0fr'"
+          >
+            <span class="term-reveal-inner">
+              <span class="term-reveal-content">
+                {{
+                  language === "es"
+                    ? "Renderizado en el servidor para mejorar el rendimiento inicial y el SEO."
+                    : "Server-side rendering to improve initial load performance and SEO."
+                }}
+              </span>
+            </span>
+          </span>
+        </p>
       </div>
-      <div class="marquee-wrapper">
-        <div class="marquee-track">
-          <!-- Lista original -->
-          <div class="marquee-item">
-            <img src="assets/logos/angular.svg" alt="Angular" title="Angular" />
-            <span>Angular</span>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section class="tech-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-2 text-center" data-reveal>
+        <p class="kicker">
+          {{ language === "es" ? "Con qué trabajo" : "What I work with" }}
+        </p>
+      </div>
+      <p class="tech-sub" data-reveal style="transition-delay: 60ms">
+        {{
+          language === "es"
+            ? "Mi stack, de los fundamentos al detalle"
+            : "My stack, from the fundamentals to the details"
+        }}
+      </p>
+
+      <div class="index-list">
+        @for (tech of techStack; track tech.name; let i = $index) {
+          <div
+            class="index-row"
+            data-reveal
+            [style.transition-delay.ms]="i * 35"
+          >
+            <span class="num">{{ (i + 1).toString().padStart(2, "0") }}</span>
+            <span class="badge-sq">
+              <img [src]="tech.logo" [alt]="tech.name" />
+            </span>
+            <span class="name">{{ tech.name }}</span>
+            <span class="tag">{{
+              language === "es" ? tech.categoryEs : tech.categoryEn
+            }}</span>
           </div>
-          <div class="marquee-item">
-            <img src="assets/logos/typescript.svg" alt="TypeScript" title="TypeScript" />
-            <span>TypeScript</span>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos -->
+  <section id="projects" class="work-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="section-head" data-reveal>
+        <p class="kicker">
+          {{ language === "es" ? "Proyectos destacados" : "Featured projects" }}
+        </p>
+        <span class="count">(04)</span>
+      </div>
+
+      <div class="worklist">
+        @for (p of projects; track p.name; let i = $index) {
+          <div
+            class="work-row"
+            data-reveal
+            [style.transition-delay.ms]="i * 60"
+          >
+            <span class="idx">0{{ i + 1 }}</span>
+            <div class="work-info">
+              <h3>{{ p.name }}</h3>
+              <p>{{ language === "es" ? p.descEs : p.descEn }}</p>
+              <div class="work-tags">
+                @for (t of p.stack; track t) {
+                  <span>{{ t }}</span>
+                }
+              </div>
+            </div>
+            <div class="work-actions">
+              <a
+                [href]="p.githubUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="icon-link"
+                aria-label="GitHub"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a
+                [href]="p.liveUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="icon-link icon-link-primary"
+                aria-label="Ver proyecto"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
           </div>
-          <div class="marquee-item">
-            <img src="assets/logos/Tailwind CSS.svg" alt="Tailwind CSS" title="Tailwind CSS" />
-            <span>Tailwind CSS</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/rxjs.svg" alt="RxJS" title="RxJS" />
-            <span>RxJS</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/github.svg" alt="GitHub" title="GitHub" />
-            <span>GitHub</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/git-bash.svg" alt="Git" title="Git" />
-            <span>Git</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/node.svg" alt="Node.js" title="Node.js" />
-            <span>Node.js</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/docker.svg" alt="Docker" title="Docker" />
-            <span>Docker</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/nest.svg" alt="NestJS" title="NestJS" />
-            <span>NestJS</span>
-          </div>
-          <!-- Duplicado para loop continuo -->
-          <div class="marquee-item">
-            <img src="assets/logos/angular.svg" alt="Angular" title="Angular" />
-            <span>Angular</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/typescript.svg" alt="TypeScript" title="TypeScript" />
-            <span>TypeScript</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/Tailwind CSS.svg" alt="Tailwind CSS" title="Tailwind CSS" />
-            <span>Tailwind CSS</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/rxjs.svg" alt="RxJS" title="RxJS" />
-            <span>RxJS</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/github.svg" alt="GitHub" title="GitHub" />
-            <span>GitHub</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/git-bash.svg" alt="Git" title="Git" />
-            <span>Git</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/node.svg" alt="Node.js" title="Node.js" />
-            <span>Node.js</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/docker.svg" alt="Docker" title="Docker" />
-            <span>Docker</span>
-          </div>
-          <div class="marquee-item">
-            <img src="assets/logos/nest.svg" alt="NestJS" title="NestJS" />
-            <span>NestJS</span>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 contact-grid">
+      <div data-reveal>
+        <p class="kicker">{{ language === "es" ? "Contacto" : "Contact" }}</p>
+        <h2>{{ language === "es" ? "Hablemos" : "Let's talk" }}</h2>
+        <p class="contact-lede">
+          {{
+            language === "es"
+              ? "¿Tenés un proyecto en mente? Contáme de qué se trata y te respondo a la brevedad."
+              : "Got a project in mind? Tell me about it and I'll get back to you shortly."
+          }}
+        </p>
+
+        <div class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          {{
+            language === "es"
+              ? "Disponible para nuevos proyectos"
+              : "Available for new projects"
+          }}
+        </div>
+
+        <div class="info-list">
+          <a
+            class="info-row"
+            href="https://www.linkedin.com/in/francisco-larrosa-784a3020b/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="info-icon"><i class="fa-brands fa-linkedin-in"></i></span>
+            <span class="info-text">
+              <span class="info-label">LinkedIn</span>
+              <span class="info-value">/in/francisco-larrosa</span>
+            </span>
+          </a>
+          <a
+            class="info-row"
+            href="https://github.com/FranciscoLarrosa96"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="info-icon"><i class="fa-brands fa-github"></i></span>
+            <span class="info-text">
+              <span class="info-label">GitHub</span>
+              <span class="info-value">&#64;FranciscoLarrosa96</span>
+            </span>
+          </a>
+          <div class="info-row info-row-static">
+            <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="info-text">
+              <span class="info-label">{{ language === "es" ? "Ubicación" : "Location" }}</span>
+              <span class="info-value">{{ language === "es" ? "Argentina, remoto" : "Argentina, remote" }}</span>
+            </span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Proyectos -->
-    <section id="projects" class="py-16 px-4 sm:px-8 lg:px-20 bg-background dark:bg-black text-text dark:text-white">
-      <h2 class="text-3xl font-bold text-main mb-12 text-center" data-aos="fade-up">
-        {{ language === 'es' ? 'Proyectos Destacados' : 'Featured Projects' }}
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <!-- Proyecto 1 -->
-        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
-          <img src="assets/img/landingpageivan.avif" alt="Landing page de Ivan" class="rounded-t-2xl w-full h-56 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Landing Page - Servicio Técnico</h3>
-            <p class="text-sm mb-4">
-              {{ language === 'es' 
-                ? 'Una landing elegante y moderna, construida con Angular, Tailwind CSS y animaciones suaves para una presencia online profesional.' 
-                : 'A sleek and modern landing page built with Angular, Tailwind CSS, and subtle animations for a strong online presence.' }}
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs mb-4">
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular 19</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">SCSS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
-            </div>
-            <div class="flex gap-2">
-              <a href="https://github.com/FranciscoLarrosa96/landingPageIvan" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-main transition-colors text-sm">
-                GitHub
-              </a>
-              <a href="https://franciscolarrosa96.github.io/landingPageIvan/" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
-                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
-              </a>
-            </div>
-          </div>
+      <form
+        [formGroup]="contactForm"
+        (ngSubmit)="sendEmail()"
+        data-reveal
+        style="transition-delay: 80ms"
+      >
+        <div class="field">
+          <label for="name">{{ language === "es" ? "Nombre" : "Name" }}</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="{{ language === 'es' ? 'Tu nombre' : 'Your name' }}"
+          />
+        </div>
+        <div class="field">
+          <label for="email">{{
+            language === "es" ? "Correo electrónico" : "Email"
+          }}</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="{{ language === 'es' ? 'Tu email' : 'Your email' }}"
+          />
+        </div>
+        <div class="field">
+          <label for="message">{{
+            language === "es" ? "Mensaje" : "Message"
+          }}</label>
+          <textarea
+            id="message"
+            formControlName="message"
+            rows="5"
+            placeholder="{{
+              language === 'es'
+                ? 'Escribe tu mensaje aquí...'
+                : 'Write your message here...'
+            }}"
+          ></textarea>
         </div>
 
-        <!-- Proyecto 2 -->
-        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
-          <img src="assets/img/clinicadeojos.avif" alt="Clínica de ojos" class="rounded-t-2xl w-full h-56 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Clínica de Ojos</h3>
-            <p class="text-sm mb-4">
-              {{ language === 'es' 
-                ? 'Sitio institucional para una clínica oftalmológica, con navegación fluida, diseño adaptable y secciones bien estructuradas.' 
-                : 'Institutional website for an eye clinic, with smooth navigation, responsive design, and well-structured content.' }}
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs mb-4">
-              <span class="bg-main/10 text-main px-2 py-1 rounded">HTML</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">CSS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">JavaScript</span>
-            </div>
-            <div class="flex gap-2">
-              <a href="https://github.com/FranciscoLarrosa96/ClinicaDeOjos" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-main transition-colors text-sm">
-                GitHub
-              </a>
-              <a href="https://franciscolarrosa96.github.io/ClinicaDeOjos/#home" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
-                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
-              </a>
-            </div>
-          </div>
+        <button
+          type="submit"
+          [disabled]="isSending || contactForm.invalid"
+          class="btn btn-primary"
+        >
+          {{
+            isSending
+              ? language === "es"
+                ? "Enviando..."
+                : "Sending..."
+              : language === "es"
+                ? "Enviar mensaje"
+                : "Send message"
+          }}
+        </button>
+
+        <div *ngIf="sendSuccess === true" class="form-msg form-msg-ok">
+          {{
+            language === "es"
+              ? "¡Mensaje enviado con éxito!"
+              : "Message sent successfully!"
+          }}
         </div>
-        <!-- Proyecto 3 - BioMind -->
-        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
-          <img src="assets/img/previa.avif" alt="BioMind" class="rounded-t-2xl w-full h-56 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">BioMind 🧬</h3>
-            <p class="text-sm mb-4">
-              {{ language === 'es' 
-                ? 'Aplicación web inteligente que democratiza el acceso a la información médica. Utiliza IA de Google Gemini para convertir PDFs de análisis de laboratorio en explicaciones claras y comprensibles para cualquier persona.' 
-                : 'Intelligent web app that democratizes access to medical information. Uses Google Gemini AI to transform laboratory analysis PDFs into clear and understandable explanations for everyone.' }}
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs mb-4">
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular 19</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">TypeScript</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Google Gemini AI</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">AOS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
-            </div>
-            <div class="flex gap-2">
-              <a href="https://github.com/FranciscoLarrosa96/BioMind" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/70 transition-colors text-sm">
-                GitHub
-              </a>
-              <a href="https://franciscolarrosa96.github.io/BioMind/" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
-                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
-              </a>
-            </div>
-          </div>
+        <div *ngIf="sendSuccess === false" class="form-msg form-msg-err">
+          {{
+            language === "es"
+              ? "Ocurrió un error al enviar."
+              : "An error occurred while sending."
+          }}
         </div>
-        <!-- Proyecto 4 - Landing 7Ideas -->
-        <div class="bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300" data-aos="zoom-in">
-          <img src="assets/preview7id.jpg" alt="Landing 7Ideas" class="rounded-t-2xl w-full h-56 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Landing Page - 7Ideas</h3>
-            <p class="text-sm mb-4">
-              {{ language === 'es' 
-                ? 'Landing institucional moderna y dinámica para la empresa 7Ideas. Implementa Angular 20, Tailwind CSS, animaciones AOS y formulario funcional con EmailJS.' 
-                : 'Modern and dynamic landing page for 7Ideas company. Built with Angular 20, Tailwind CSS, AOS animations, and a working contact form using EmailJS.' }}
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs mb-4">
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Angular 20</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Tailwind CSS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">SCSS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">AOS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">EmailJS</span>
-              <span class="bg-main/10 text-main px-2 py-1 rounded">Responsive</span>
-            </div>
-            <div class="flex gap-2">
-              <a href="https://github.com/FranciscoLarrosa96/7idLanding" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-main transition-colors text-sm">
-                GitHub
-              </a>
-              <a href="https://franciscolarrosa96.github.io/7idLanding/#inicio" target="_blank" rel="noopener noreferrer"
-                class="inline-block bg-main text-white px-4 py-2 rounded hover:bg-hover transition-colors text-sm">
-                {{ language === 'es' ? 'Ver Proyecto' : 'View Project' }}
-              </a>
-            </div>
-          </div>
-        </div>
-
-        </div>
-    </section>
-
-
-
-    <!-- Contact Section -->
-<!-- Contact Section -->
-<section id="contact" class="py-20 px-4 sm:px-8 lg:px-20 bg-background dark:bg-black text-text dark:text-white">
-  <div
-    data-aos="fade-up"
-    data-aos-duration="1000"
-    class="max-w-2xl mx-auto text-center mb-12"
-  >
-    <h2 class="text-4xl font-bold text-main mb-2">
-        {{language === 'es' ? 'Contacto' : 'Contact'}}
-    </h2>
-    <p class="text-lg text-text dark:text-white/80">
-        {{language === 'es' ? '¿Tenés un proyecto en mente? ¡Hablemos!' : 'Got a project in mind? Let\'s talk!'}}
-    </p>
-  </div>
-
-  <form
-    [formGroup]="contactForm"
-    (ngSubmit)="sendEmail()"
-    data-aos="fade-up"
-    data-aos-delay="100"
-    data-aos-duration="1000"
-    class="space-y-6 max-w-2xl mx-auto p-6 bg-white/10 backdrop-blur-lg rounded-2xl border border-border-color shadow-lg"
-  >
-    <div>
-      <label class="block text-sm font-medium mb-1" for="name">
-        {{ language === 'es' ? 'Nombre' : 'Name' }}
-      </label>
-      <input
-        type="text"
-        id="name"
-        formControlName="name"
-        placeholder="{{ language === 'es' ? 'Tu nombre' : 'Your name' }}"
-        class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition"
-      />
+      </form>
     </div>
-
-    <div>
-      <label class="block text-sm font-medium mb-1" for="email">
-        {{ language === 'es' ? 'Correo electrónico' : 'Email' }}
-      </label>
-      <input
-        type="email"
-        id="email"
-        formControlName="email"
-        placeholder="{{ language === 'es' ? 'Tu email' : 'Your email' }}"
-        class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition"
-      />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium mb-1" for="message">
-        {{ language === 'es' ? 'Mensaje' : 'Message' }}
-      </label>
-      <textarea
-        id="message"
-        formControlName="message"
-        rows="5"
-        placeholder="{{ language === 'es' ? 'Escribe tu mensaje aquí...' : 'Write your message here...' }}"
-        class="w-full p-3 rounded-lg bg-white/20 dark:bg-white/10 border border-border-color outline-none focus:ring-2 focus:ring-main transition resize-none"
-      ></textarea>
-    </div>
-
-    <button
-      type="submit"
-      [disabled]="isSending  || contactForm.invalid"
-      class="bg-main hover:bg-hover text-white font-semibold px-6 py-3 rounded-lg transition disabled:opacity-50"
-    >
-      {{ isSending ? (language === 'es' ? 'Enviando...' : 'Sending...') : (language === 'es' ? 'Enviar mensaje' : 'Send message') }}
-    </button>
-
-    <div *ngIf="sendSuccess === true" class="text-green-500 font-medium text-center">
-        {{ language === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!' }}
-    </div>
-    <div *ngIf="sendSuccess === false" class="text-red-500 font-medium text-center">
-      {{ language === 'es' ? 'Ocurrió un error al enviar 😢' : 'An error occurred while sending 😢' }}
-    </div>
-  </form>
-</section>
-
-
+  </section>
 </main>
 
-<footer class="bg-background dark:bg-gray-900 text-text-primary dark:text-gray-300 py-8 transition-colors duration-300">
-    <div class="max-w-6xl mx-auto px-4">
-        <!-- Derechos de autor -->
-        <div class="mt-6 text-center text-sm">
-            <p>&copy; 2025 Portfolio. Todos los derechos reservados. Desarrollado por
-                <a href="https://github.com/FranciscoLarrosa96" target="_blank" rel="noopener noreferrer"
-                    class="text-main hover:underline font-semibold">Francisco Larrosa</a>.
-            </p>
-        </div>
-    </div>
+<footer class="site-footer">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+    <p>
+      &copy; 2026
+      {{
+        language === "es"
+          ? "Todos los derechos reservados. Desarrollado por"
+          : "All rights reserved. Built by"
+      }}
+      <a
+        href="https://github.com/FranciscoLarrosa96"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-main hover:underline font-semibold"
+        >Francisco Larrosa</a
+      >.
+    </p>
+  </div>
 </footer>

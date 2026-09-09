@@ -33,12 +33,9 @@
               "src/robots.txt"
             ],
             "styles": [
-              "node_modules/aos/dist/aos.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/aos/dist/aos.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -96,12 +93,9 @@
               "src/robots.txt"
             ],
             "styles": [
-              "node_modules/aos/dist/aos.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/aos/dist/aos.js"
-            ]
+            "scripts": []
           }
         },
         "deploy": {

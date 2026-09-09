@@ -5,12 +5,9 @@ import {
   OnInit,
   Inject,
   Renderer2,
+  HostListener,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import * as AOS from 'aos';
-import { NgParticlesModule } from 'ng-particles';
-import type { Container, ISourceOptions, Engine } from 'tsparticles-engine';
-import { loadSlim } from 'tsparticles-slim';
 import {
   FormBuilder,
   FormGroup,
@@ -19,13 +16,18 @@ import {
 } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 
-interface TypedChar {
-  char: string;
-  class: string;
+interface Project {
+  name: string;
+  descEs: string;
+  descEn: string;
+  stack: string[];
+  githubUrl: string;
+  liveUrl: string;
 }
+
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, NgParticlesModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -37,76 +39,86 @@ export class AppComponent implements OnInit, AfterViewInit {
   sendSuccess: boolean | null = null;
   isScrolled = false;
   isMobileMenuOpen = false;
-  particlesOptions: ISourceOptions = {
-    background: {
-      color: {
-        value: getComputedStyle(document.documentElement)
-          .getPropertyValue('--background-color')
-          .trim(),
-      },
-    },
-    fpsLimit: 60,
-    particles: {
-      color: {
-        value: getComputedStyle(document.documentElement)
-          .getPropertyValue('--main-color')
-          .trim(),
-      },
-      links: {
-        color: '#000000',
-        distance: 150,
-        enable: true,
-        opacity: 0.5,
-        width: 1,
-      },
-      collisions: { enable: true },
-      move: {
-        direction: 'none',
-        enable: true,
-        outModes: { default: 'bounce' },
-        speed: 2,
-      },
-      number: {
-        value: 60,
-        density: { enable: true, area: 800 },
-      },
-      opacity: { value: 0.7 },
-      shape: { type: 'circle' },
-      size: { value: { min: 2, max: 6 } },
-    },
-    detectRetina: true,
-  };
-
-  particlesInit = this._particlesInit.bind(this);
-
-  texts: TypedChar[][] = [
-    [...'¡Hola! Soy Frontend Dev'].map((char) => ({
-      char,
-      class: 'text-main',
-    })),
-    [...'Hi! I am a Frontend Dev'].map((char) => ({
-      char,
-      class: 'text-main',
-    })),
-    [...'Bienvenido a mi portfolio!'].map((char) => ({
-      char,
-      class: 'text-main',
-    })),
-    [...'Welcome to my portfolio!'].map((char) => ({
-      char,
-      class: 'text-main',
-    })),
-  ];
-
-  typedChars: TypedChar[] = [];
-  textIndex = 0;
-  charIndex = 0;
-  isDeleting = false;
 
   title = 'Portfolio';
 
   isDarkMode = false;
-  private container?: Container;
+  prefersReducedMotion = false;
+
+  // Which annotated term (if any) in the About section has its definition
+  // expanded. Click/tap/Enter toggles it -- works identically on touch and
+  // desktop, unlike a hover-only tooltip that mobile visitors can't reach.
+  openTerm: string | null = null;
+
+  toggleTerm(id: string, event: Event) {
+    event.stopPropagation();
+    this.openTerm = this.openTerm === id ? null : id;
+  }
+
+  @HostListener('document:click')
+  closeOpenTerm() {
+    this.openTerm = null;
+  }
+
+  @HostListener('document:keydown.escape')
+  closeOpenTermOnEscape() {
+    this.openTerm = null;
+  }
+
+  techStack: { name: string; logo: string; categoryEs: string; categoryEn: string }[] = [
+    { name: 'Angular', logo: 'assets/logos/angular.svg', categoryEs: 'Núcleo', categoryEn: 'Core' },
+    { name: 'TypeScript', logo: 'assets/logos/typescript.svg', categoryEs: 'Núcleo', categoryEn: 'Core' },
+    { name: 'Tailwind CSS', logo: 'assets/logos/Tailwind CSS.svg', categoryEs: 'Núcleo', categoryEn: 'Core' },
+    { name: 'RxJS', logo: 'assets/logos/rxjs.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+    { name: 'GitHub', logo: 'assets/logos/github.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+    { name: 'Git', logo: 'assets/logos/git-bash.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+    { name: 'Node.js', logo: 'assets/logos/node.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+    { name: 'Docker', logo: 'assets/logos/docker.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+    { name: 'NestJS', logo: 'assets/logos/nest.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+  ];
+
+  projects: Project[] = [
+    {
+      name: 'Landing Page - Servicio Técnico',
+      descEs:
+        'Una landing elegante y moderna, construida con Angular, Tailwind CSS y animaciones suaves para una presencia online profesional.',
+      descEn:
+        'A sleek and modern landing page built with Angular, Tailwind CSS, and subtle animations for a strong online presence.',
+      stack: ['Angular 19', 'SCSS', 'Tailwind CSS'],
+      githubUrl: 'https://github.com/FranciscoLarrosa96/landingPageIvan',
+      liveUrl: 'https://franciscolarrosa96.github.io/landingPageIvan/',
+    },
+    {
+      name: 'Clínica de Ojos',
+      descEs:
+        'Sitio institucional para una clínica oftalmológica, con navegación fluida, diseño adaptable y secciones bien estructuradas.',
+      descEn:
+        'Institutional website for an eye clinic, with smooth navigation, responsive design, and well-structured content.',
+      stack: ['HTML', 'CSS', 'JavaScript'],
+      githubUrl: 'https://github.com/FranciscoLarrosa96/ClinicaDeOjos',
+      liveUrl: 'https://franciscolarrosa96.github.io/ClinicaDeOjos/#home',
+    },
+    {
+      name: 'BioMind',
+      descEs:
+        'Aplicación web inteligente que democratiza el acceso a la información médica. Utiliza IA de Google Gemini para convertir PDFs de análisis de laboratorio en explicaciones claras y comprensibles para cualquier persona.',
+      descEn:
+        'Intelligent web app that democratizes access to medical information. Uses Google Gemini AI to transform laboratory analysis PDFs into clear and understandable explanations for everyone.',
+      stack: ['Angular 19', 'TypeScript', 'Google Gemini AI'],
+      githubUrl: 'https://github.com/FranciscoLarrosa96/BioMind',
+      liveUrl: 'https://franciscolarrosa96.github.io/BioMind/',
+    },
+    {
+      name: 'Landing Page - 7Ideas',
+      descEs:
+        'Landing institucional moderna y dinámica para la empresa 7Ideas. Implementa Angular 20, Tailwind CSS y formulario funcional con EmailJS.',
+      descEn:
+        'Modern and dynamic landing page for 7Ideas company. Built with Angular 20, Tailwind CSS, and a working contact form using EmailJS.',
+      stack: ['Angular 20', 'Tailwind CSS', 'EmailJS'],
+      githubUrl: 'https://www.sieteideas.com.ar/',
+      liveUrl: 'https://www.sieteideas.com.ar/',
+    },
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -122,15 +134,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private async _particlesInit(engine: Engine): Promise<void> {
-    await loadSlim(engine);
-  }
-
   ngOnInit() {
+    this.prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
     this.configDarkMode();
     this.updateDarkModeClass();
-    this.particlesOptions = this.getParticlesOptions();
-    this.typeLoop();
+
     const savedLang = localStorage.getItem('lang') as 'es' | 'en';
     if (savedLang) this.language = savedLang;
 
@@ -140,18 +150,49 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    AOS.init({
-      duration: 1000,
-      once: false,
-    });
     this.scrollObserver();
     this.setupScrollListener();
+    this.setupScrollReveal();
   }
 
   setupScrollListener() {
-    window.addEventListener('scroll', () => {
-      this.isScrolled = window.scrollY > 50;
-    });
+    // IntersectionObserver en lugar de un listener de scroll: evita disparar
+    // change detection de Angular en cada pixel scrolleado.
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        this.isScrolled = !entry.isIntersecting;
+      },
+      { rootMargin: '-50px 0px 0px 0px', threshold: 0 },
+    );
+    observer.observe(sentinel);
+  }
+
+  setupScrollReveal() {
+    const items = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-reveal]'),
+    );
+
+    if (this.prefersReducedMotion) {
+      items.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' },
+    );
+
+    items.forEach((el) => observer.observe(el));
   }
 
   toggleMobileMenu() {
@@ -209,24 +250,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     } else {
       htmlElement.classList.remove('dark');
     }
-
-    this.particlesOptions = this.getParticlesOptions();
-
-    // Esto le dice al componente ng-particles que recargue las opciones
-    // 👉 Método seguro para aplicar nuevas opciones con tsparticles-slim
-    setTimeout(() => {
-      this.container?.destroy();
-      this.container = undefined; // limpiamos antes de volver a crear
-
-      const el = document.getElementById('tsparticles') as HTMLElement;
-      if (el) {
-        window.tsParticles
-          .load('tsparticles', this.particlesOptions)
-          .then((container) => {
-            this.container = container;
-          });
-      }
-    }, 0);
   }
 
   updateDarkModeClass(): void {
@@ -236,69 +259,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     } else {
       html.classList.remove('dark');
     }
-  }
-
-  typeLoop(): void {
-    const currentText = this.texts[this.textIndex];
-
-    if (this.isDeleting) {
-      this.typedChars.pop();
-      this.charIndex--;
-    } else {
-      this.typedChars.push(currentText[this.charIndex]);
-      this.charIndex++;
-    }
-
-    let delay = this.isDeleting ? 30 : 80;
-
-    if (!this.isDeleting && this.charIndex === currentText.length) {
-      delay = 1500;
-      this.isDeleting = true;
-    } else if (this.isDeleting && this.charIndex === 0) {
-      this.isDeleting = false;
-      this.textIndex = (this.textIndex + 1) % this.texts.length;
-    }
-
-    setTimeout(() => this.typeLoop(), delay);
-  }
-
-  getParticlesOptions(): ISourceOptions {
-    const rootStyles = getComputedStyle(document.documentElement);
-    const isDark = this.isDarkMode;
-
-    return {
-      background: {
-        color: { value: isDark ? '#000000' : '#ffffff' },
-      },
-      fpsLimit: 60,
-      particles: {
-        color: {
-          value: rootStyles.getPropertyValue('--main-color').trim(),
-        },
-        links: {
-          color: isDark ? '#ffffff' : '#000000',
-          distance: 150,
-          enable: true,
-          opacity: 0.5,
-          width: 1,
-        },
-        collisions: { enable: true },
-        move: {
-          direction: 'none',
-          enable: true,
-          outModes: { default: 'bounce' },
-          speed: 2,
-        },
-        number: {
-          value: 70,
-          density: { enable: true, area: 800 },
-        },
-        opacity: { value: 0.7 },
-        shape: { type: 'circle' },
-        size: { value: { min: 2, max: 7 } },
-      },
-      detectRetina: true,
-    };
   }
 
   toggleLanguage() {
@@ -423,10 +383,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.renderer.appendChild(this.document.head, personScript);
     this.renderer.appendChild(this.document.head, websiteScript);
-  }
-
-  onParticlesLoaded(container: Container): void {
-    this.container = container;
   }
 
   sendEmail() {
