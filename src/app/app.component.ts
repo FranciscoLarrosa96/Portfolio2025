@@ -65,16 +65,66 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.openTerm = null;
   }
 
-  techStack: { name: string; logo: string; categoryEs: string; categoryEn: string }[] = [
-    { name: 'Angular', logo: 'assets/logos/angular.svg', categoryEs: 'Núcleo', categoryEn: 'Core' },
-    { name: 'TypeScript', logo: 'assets/logos/typescript.svg', categoryEs: 'Núcleo', categoryEn: 'Core' },
-    { name: 'Tailwind CSS', logo: 'assets/logos/Tailwind CSS.svg', categoryEs: 'Núcleo', categoryEn: 'Core' },
-    { name: 'RxJS', logo: 'assets/logos/rxjs.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
-    { name: 'GitHub', logo: 'assets/logos/github.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
-    { name: 'Git', logo: 'assets/logos/git-bash.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
-    { name: 'Node.js', logo: 'assets/logos/node.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
-    { name: 'Docker', logo: 'assets/logos/docker.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
-    { name: 'NestJS', logo: 'assets/logos/nest.svg', categoryEs: 'Herramientas', categoryEn: 'Tooling' },
+  techStack: {
+    name: string;
+    logo: string;
+    categoryEs: string;
+    categoryEn: string;
+  }[] = [
+    {
+      name: 'Angular',
+      logo: 'assets/logos/angular.svg',
+      categoryEs: 'Núcleo',
+      categoryEn: 'Core',
+    },
+    {
+      name: 'TypeScript',
+      logo: 'assets/logos/typescript.svg',
+      categoryEs: 'Núcleo',
+      categoryEn: 'Core',
+    },
+    {
+      name: 'Tailwind CSS',
+      logo: 'assets/logos/Tailwind CSS.svg',
+      categoryEs: 'Núcleo',
+      categoryEn: 'Core',
+    },
+    {
+      name: 'RxJS',
+      logo: 'assets/logos/rxjs.svg',
+      categoryEs: 'Herramientas',
+      categoryEn: 'Tooling',
+    },
+    {
+      name: 'GitHub',
+      logo: 'assets/logos/github.svg',
+      categoryEs: 'Herramientas',
+      categoryEn: 'Tooling',
+    },
+    {
+      name: 'Git',
+      logo: 'assets/logos/git-bash.svg',
+      categoryEs: 'Herramientas',
+      categoryEn: 'Tooling',
+    },
+    {
+      name: 'Node.js',
+      logo: 'assets/logos/node.svg',
+      categoryEs: 'Herramientas',
+      categoryEn: 'Tooling',
+    },
+    {
+      name: 'Docker',
+      logo: 'assets/logos/docker.svg',
+      categoryEs: 'Herramientas',
+      categoryEn: 'Tooling',
+    },
+    {
+      name: 'NestJS',
+      logo: 'assets/logos/nest.svg',
+      categoryEs: 'Herramientas',
+      categoryEn: 'Tooling',
+    },
   ];
 
   projects: Project[] = [
@@ -336,7 +386,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       '@type': 'Person',
       name: 'Francisco Larrosa',
       jobTitle: 'Frontend Developer',
-      url: 'https://franciscolarrosa.com',
+      url: 'https://franciscolarrosa.com.ar',
       sameAs: [
         'https://github.com/FranciscoLarrosa96',
         'https://www.linkedin.com/in/francisco-larrosa',
@@ -371,7 +421,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Francisco Larrosa Portfolio',
-      url: 'https://franciscolarrosa.com',
+      url: 'https://franciscolarrosa.com.ar',
       description:
         'Portfolio profesional de Francisco Larrosa, desarrollador frontend especializado en Angular y Tailwind CSS',
       author: {
