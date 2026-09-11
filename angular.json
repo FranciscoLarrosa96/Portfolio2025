@@ -26,14 +26,28 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
               "src/assets",
-              "src/CNAME",
-              "src/sitemap.xml",
-              "src/robots.txt"
+              {
+                "glob": "CNAME",
+                "input": ".",
+                "output": "/"
+              },
+              {
+                "glob": "sitemap.xml",
+                "input": ".",
+                "output": "/"
+              },
+              {
+                "glob": "robots.txt",
+                "input": ".",
+                "output": "/"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/portfolio-layout.scss",
+              "src/assets/styles/portfolio-stack.scss",
+              "src/assets/styles/portfolio-motion.scss"
             ],
             "scripts": []
           },
@@ -86,14 +100,28 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
               "src/assets",
-              "src/CNAME",
-              "src/sitemap.xml",
-              "src/robots.txt"
+              {
+                "glob": "CNAME",
+                "input": ".",
+                "output": "/"
+              },
+              {
+                "glob": "sitemap.xml",
+                "input": ".",
+                "output": "/"
+              },
+              {
+                "glob": "robots.txt",
+                "input": ".",
+                "output": "/"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/portfolio-layout.scss",
+              "src/assets/styles/portfolio-stack.scss",
+              "src/assets/styles/portfolio-motion.scss"
             ],
             "scripts": []
           }

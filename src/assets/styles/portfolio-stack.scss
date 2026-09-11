@@ -1,0 +1,20 @@
+/* The stack is a real list, not interactive controls. All logos retain their colors. */
+.tech-block { margin-top: 76px; padding: 42px 0 0; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(220px,.8fr) minmax(0,1.6fr); align-items: center; gap: 64px; }
+.tech-heading .section-label { margin-bottom: 18px; font-size: 12px; }
+.tech-heading h3 { font-size: clamp(2rem,3vw,2.7rem); line-height: 1.15; letter-spacing: -.05em; margin: 0 0 18px; }
+.tech-heading h3 em { color: var(--accent-text); font-family: 'Source Serif 4',Georgia,serif; font-weight: 500; }
+.tech-heading > p:last-child { max-width: 260px; font-size: 16px; line-height: 1.65; color: var(--text-muted); margin: 0; }
+.tech-list { list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; padding: 0; margin: 0; }
+.tech-list li { min-width: 0; }
+.tech-tile { height: 100%; min-height: 91px; display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--hairline); border-radius: 10px; background: var(--surface); transition: border-color .25s,box-shadow .25s,transform .35s var(--ease-out); }
+.core-tech .tech-tile { background: linear-gradient(125deg,color-mix(in srgb,var(--main-color) 6%,var(--surface)),var(--surface)); border-color: color-mix(in srgb,var(--accent-text) 27%,var(--hairline)); }
+.tech-icon { flex: 0 0 40px; width: 40px; height: 40px; display: grid; place-items: center; background: #fff; border-radius: 9px; border: 1px solid #ece8ef; }
+.tech-icon img { width: 26px; height: 26px; object-fit: contain; }
+.tech-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tech-text strong { font-size: 14px; line-height: 1.3; font-weight: 600; }
+.tech-text small { font-size: 12px; color: var(--text-muted); }
+@media (hover: hover) and (pointer: fine) { .tech-tile:hover { border-color: var(--accent-text); box-shadow: 0 7px 20px #6b1d6810; transform: translateY(-3px); } }
+@media (max-width: 1100px) { .tech-block { gap: 35px; grid-template-columns: .7fr 1.5fr; } .tech-tile { padding: 13px; gap: 9px; } .tech-icon { width: 34px; height: 34px; flex-basis: 34px; } }
+@media (max-width: 850px) { .tech-block { grid-template-columns: 1fr; gap: 26px; margin-top: 50px; } .tech-heading > p:last-child { max-width: none; } .tech-tile { min-height: 84px; padding: 15px; } }
+@media (max-width: 620px) { .tech-block { padding-top: 32px; margin-top: 35px; } .tech-heading h3 { font-size: 2.4rem; } .tech-list { gap: 9px; } .tech-tile { flex-direction: column; align-items: flex-start; gap: 12px; padding: 13px 11px; min-height: 127px; } .tech-text strong { overflow-wrap: anywhere; } .tech-heading .section-label { font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { .tech-tile:hover { transform: none; } }

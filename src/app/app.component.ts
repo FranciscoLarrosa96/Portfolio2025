@@ -3,8 +3,10 @@ import {
   AfterViewInit,
   Component,
   OnInit,
+  OnDestroy,
   Inject,
   Renderer2,
+  NgZone,
   HostListener,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
@@ -18,6 +20,13 @@ import emailjs from '@emailjs/browser';
 
 interface Project {
   name: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+  tone: string;
+  domain: string;
+  categoryEs: string;
+  categoryEn: string;
   descEs: string;
   descEn: string;
   stack: string[];
@@ -31,8 +40,12 @@ interface Project {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit, AfterViewInit {
-  activeSection: string = '';
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+  activeSection: string = 'home';
+  readonly currentYear = new Date().getFullYear();
+  private observers: IntersectionObserver[] = [];
+  private motionCleanup: (() => void)[] = [];
+  private sectionPositions = new Map<string, number>();
   language: 'es' | 'en' = 'es';
   contactForm!: FormGroup;
   isSending = false;
@@ -45,24 +58,43 @@ export class AppComponent implements OnInit, AfterViewInit {
   isDarkMode = false;
   prefersReducedMotion = false;
 
-  // Which annotated term (if any) in the About section has its definition
-  // expanded. Click/tap/Enter toggles it -- works identically on touch and
-  // desktop, unlike a hover-only tooltip that mobile visitors can't reach.
-  openTerm: string | null = null;
-
-  toggleTerm(id: string, event: Event) {
-    event.stopPropagation();
-    this.openTerm = this.openTerm === id ? null : id;
-  }
-
-  @HostListener('document:click')
-  closeOpenTerm() {
-    this.openTerm = null;
-  }
-
   @HostListener('document:keydown.escape')
-  closeOpenTermOnEscape() {
-    this.openTerm = null;
+  closeMenuOnEscape() {
+    if (this.isMobileMenuOpen) {
+      this.closeMobileMenu();
+      this.document.getElementById('menu-toggle')?.focus();
+    }
+  }
+
+  @HostListener('window:resize')
+  closeMenuOnDesktop() {
+    if (window.innerWidth > 850) this.closeMobileMenu();
+  }
+
+  fieldInvalid(name: string): boolean {
+    const field = this.contactForm.get(name);
+    return !!field && field.invalid && field.touched;
+  }
+
+  private readPreference(key: string): string | null {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  private savePreference(key: string, value: string): void {
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      /* Preferences still apply to this visit. */
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.observers.forEach((observer) => observer.disconnect());
+    this.motionCleanup.forEach((cleanup) => cleanup());
   }
 
   techStack: {
@@ -129,44 +161,72 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   projects: Project[] = [
     {
-      name: 'Landing Page - Servicio Técnico',
+      name: '7Ideas',
+      image: 'assets/img/7ideas.png',
+      imageWidth: 1891,
+      imageHeight: 912,
+      tone: 'plum',
+      domain: 'sieteideas.com.ar',
+      categoryEs: 'Sitio institucional',
+      categoryEn: 'Business website',
       descEs:
-        'Una landing elegante y moderna, construida con Angular, Tailwind CSS y animaciones suaves para una presencia online profesional.',
+        'Una presencia digital para una empresa de software: servicios claros, identidad propia y un formulario para conectar con nuevos clientes.',
       descEn:
-        'A sleek and modern landing page built with Angular, Tailwind CSS, and subtle animations for a strong online presence.',
-      stack: ['Angular 19', 'SCSS', 'Tailwind CSS'],
-      githubUrl: 'https://github.com/FranciscoLarrosa96/landingPageIvan',
-      liveUrl: 'https://franciscolarrosa96.github.io/landingPageIvan/',
+        'A digital presence for a software company: clear services, a distinct identity, and a contact form to connect with new clients.',
+      stack: ['Angular 20', 'Tailwind CSS', 'EmailJS'],
+      githubUrl: '',
+      liveUrl: 'https://www.sieteideas.com.ar/',
     },
     {
       name: 'Clínica de Ojos',
+      image: 'assets/img/clinicadeojos.avif',
+      imageWidth: 1902,
+      imageHeight: 697,
+      tone: 'teal',
+      domain: 'Clínica de Ojos · Tandil',
+      categoryEs: 'Salud · Web institucional',
+      categoryEn: 'Healthcare website',
       descEs:
-        'Sitio institucional para una clínica oftalmológica, con navegación fluida, diseño adaptable y secciones bien estructuradas.',
+        'Información y servicios de una clínica oftalmológica, organizados en un sitio adaptable y fácil de recorrer.',
       descEn:
-        'Institutional website for an eye clinic, with smooth navigation, responsive design, and well-structured content.',
+        'An eye clinic’s information and services, organized in a responsive website that’s easy to navigate.',
       stack: ['HTML', 'CSS', 'JavaScript'],
       githubUrl: 'https://github.com/FranciscoLarrosa96/ClinicaDeOjos',
       liveUrl: 'https://franciscolarrosa96.github.io/ClinicaDeOjos/#home',
     },
     {
-      name: 'BioMind',
+      name: 'Reparaciones Iván',
+      image: 'assets/img/landingpageivan.avif',
+      imageWidth: 1882,
+      imageHeight: 885,
+      tone: 'blue',
+      domain: 'Reparaciones Iván',
+      categoryEs: 'Servicios · Landing page',
+      categoryEn: 'Services · Landing page',
       descEs:
-        'Aplicación web inteligente que democratiza el acceso a la información médica. Utiliza IA de Google Gemini para convertir PDFs de análisis de laboratorio en explicaciones claras y comprensibles para cualquier persona.',
+        'Una vidriera digital para un servicio técnico: qué ofrece, cómo trabaja y cómo contactarlo, en una experiencia directa.',
       descEn:
-        'Intelligent web app that democratizes access to medical information. Uses Google Gemini AI to transform laboratory analysis PDFs into clear and understandable explanations for everyone.',
-      stack: ['Angular 19', 'TypeScript', 'Google Gemini AI'],
-      githubUrl: 'https://github.com/FranciscoLarrosa96/BioMind',
-      liveUrl: 'https://franciscolarrosa96.github.io/BioMind/',
+        'A digital storefront for a repair service: what it offers, how it works, and how to get in touch, in one straightforward experience.',
+      stack: ['Angular 19', 'SCSS', 'Tailwind CSS'],
+      githubUrl: 'https://github.com/FranciscoLarrosa96/landingPageIvan',
+      liveUrl: 'https://franciscolarrosa96.github.io/landingPageIvan/',
     },
     {
-      name: 'Landing Page - 7Ideas',
+      name: 'BioMind',
+      image: 'assets/img/previa.avif',
+      imageWidth: 1358,
+      imageHeight: 889,
+      tone: 'mint',
+      domain: 'BioMind',
+      categoryEs: 'Aplicación web · IA',
+      categoryEn: 'Web application · AI',
       descEs:
-        'Landing institucional moderna y dinámica para la empresa 7Ideas. Implementa Angular 20, Tailwind CSS y formulario funcional con EmailJS.',
+        'Una aplicación que utiliza Google Gemini para presentar explicaciones de análisis de laboratorio a partir de archivos PDF.',
       descEn:
-        'Modern and dynamic landing page for 7Ideas company. Built with Angular 20, Tailwind CSS, and a working contact form using EmailJS.',
-      stack: ['Angular 20', 'Tailwind CSS', 'EmailJS'],
-      githubUrl: 'https://www.sieteideas.com.ar/',
-      liveUrl: 'https://www.sieteideas.com.ar/',
+        'An application that uses Google Gemini to present explanations of laboratory reports from PDF files.',
+      stack: ['Angular 19', 'TypeScript', 'Google Gemini'],
+      githubUrl: 'https://github.com/FranciscoLarrosa96/BioMind',
+      liveUrl: 'https://franciscolarrosa96.github.io/BioMind/',
     },
   ];
 
@@ -176,11 +236,29 @@ export class AppComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
+    private zone: NgZone,
   ) {
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/\S/),
+          Validators.maxLength(100),
+        ],
+      ],
+      email: [
+        '',
+        [Validators.required, Validators.email, Validators.maxLength(254)],
+      ],
+      message: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/\S/),
+          Validators.maxLength(5000),
+        ],
+      ],
     });
   }
 
@@ -191,8 +269,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.configDarkMode();
     this.updateDarkModeClass();
 
-    const savedLang = localStorage.getItem('lang') as 'es' | 'en';
-    if (savedLang) this.language = savedLang;
+    const savedLang = this.readPreference('lang');
+    if (savedLang === 'es' || savedLang === 'en') this.language = savedLang;
 
     // Inicializar SEO
     this.updateMetaTags();
@@ -202,7 +280,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.scrollObserver();
     this.setupScrollListener();
-    this.setupScrollReveal();
+    this.zone.runOutsideAngular(() => {
+      this.setupScrollReveal();
+      this.setupHeroMotion();
+    });
   }
 
   setupScrollListener() {
@@ -218,31 +299,91 @@ export class AppComponent implements OnInit, AfterViewInit {
       { rootMargin: '-50px 0px 0px 0px', threshold: 0 },
     );
     observer.observe(sentinel);
+    this.observers.push(observer);
   }
 
   setupScrollReveal() {
     const items = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-reveal]'),
+      this.document.querySelectorAll<HTMLElement>('[data-reveal]'),
     );
-
-    if (this.prefersReducedMotion) {
-      items.forEach((el) => el.classList.add('is-in'));
+    if (this.prefersReducedMotion || !('IntersectionObserver' in window))
       return;
-    }
-
+    // Content is visible by default. Only observed items below the viewport are
+    // prepared for entry; deep links and keyboard navigation remain readable.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const element = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            observer.unobserve(entry.target);
+            element.classList.remove('reveal-pending');
+            element.classList.add('is-in');
+          } else if (entry.boundingClientRect.top >= window.innerHeight) {
+            // Rearm below the viewport so later downward passes can replay.
+            element.classList.remove('is-in');
+            element.classList.add('reveal-pending');
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' },
+      { threshold: 0, rootMargin: '0px 0px -24px 0px' },
     );
+    items.forEach((element) => {
+      if (element.getBoundingClientRect().top >= window.innerHeight - 24) {
+        element.classList.add('reveal-pending');
+      }
+      observer.observe(element);
+    });
+    this.observers.push(observer);
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const showAll = () => {
+      if (!preference.matches) return;
+      observer.disconnect();
+      items.forEach((element) => element.classList.remove('reveal-pending'));
+    };
+    preference.addEventListener('change', showAll);
+    this.motionCleanup.push(() =>
+      preference.removeEventListener('change', showAll),
+    );
+  }
 
-    items.forEach((el) => observer.observe(el));
+  setupHeroMotion() {
+    const hero = this.document.getElementById('hero-visual');
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!hero || reduced.matches || !pointer.matches) return;
+    let frame = 0;
+    const move = (event: PointerEvent) => {
+      if (reduced.matches || !pointer.matches) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const x = Math.max(
+          -0.5,
+          Math.min(0.5, (event.clientX - rect.left) / rect.width - 0.5),
+        );
+        const y = Math.max(
+          -0.5,
+          Math.min(0.5, (event.clientY - rect.top) / rect.height - 0.5),
+        );
+        hero.style.setProperty('--tilt-x', `${-y * 5}deg`);
+        hero.style.setProperty('--tilt-y', `${x * 5}deg`);
+      });
+    };
+    const reset = () => {
+      cancelAnimationFrame(frame);
+      hero.style.setProperty('--tilt-x', '0deg');
+      hero.style.setProperty('--tilt-y', '0deg');
+    };
+    hero.addEventListener('pointermove', move, { passive: true });
+    hero.addEventListener('pointerleave', reset);
+    reduced.addEventListener('change', reset);
+    pointer.addEventListener('change', reset);
+    this.motionCleanup.push(() => {
+      reset();
+      hero.removeEventListener('pointermove', move);
+      hero.removeEventListener('pointerleave', reset);
+      reduced.removeEventListener('change', reset);
+      pointer.removeEventListener('change', reset);
+    });
   }
 
   toggleMobileMenu() {
@@ -254,24 +395,29 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   scrollObserver() {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.6,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.activeSection = entry.target.id;
-        }
-      });
-    }, options);
-
-    ['home', 'about', 'projects', 'contact'].forEach((id) => {
-      const el = document.getElementById(id);
+    // A narrow viewport band also works for sections taller than the screen.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting)
+            this.sectionPositions.set(
+              entry.target.id,
+              entry.boundingClientRect.top,
+            );
+          else this.sectionPositions.delete(entry.target.id);
+        });
+        const current = [...this.sectionPositions.entries()].sort(
+          (a, b) => a[1] - b[1],
+        );
+        if (current.length) this.activeSection = current[current.length - 1][0];
+      },
+      { rootMargin: '-15% 0px -60% 0px', threshold: 0 },
+    );
+    ['home', 'projects', 'about', 'contact'].forEach((id) => {
+      const el = this.document.getElementById(id);
       if (el) observer.observe(el);
     });
+    this.observers.push(observer);
   }
 
   configDarkMode() {
@@ -281,7 +427,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     ).matches;
 
     // Si el usuario ya eligió un modo antes, respetalo
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = this.readPreference('theme');
 
     if (savedTheme) {
       this.isDarkMode = savedTheme === 'dark';
@@ -292,14 +438,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
-    const htmlElement = document.documentElement;
-    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    this.savePreference('theme', this.isDarkMode ? 'dark' : 'light');
 
-    if (this.isDarkMode) {
-      htmlElement.classList.add('dark');
-    } else {
-      htmlElement.classList.remove('dark');
-    }
+    this.updateDarkModeClass();
   }
 
   updateDarkModeClass(): void {
@@ -313,7 +454,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   toggleLanguage() {
     this.language = this.language === 'es' ? 'en' : 'es';
-    localStorage.setItem('lang', this.language);
+    this.savePreference('lang', this.language);
     this.updateMetaTags(); // Actualizar meta tags al cambiar idioma
   }
 
@@ -328,14 +469,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       es: {
         title: 'Francisco Larrosa - Frontend Developer | Portfolio',
         description:
-          'Desarrollador frontend especializado en Angular y Tailwind CSS. Más de 3 años de experiencia construyendo interfaces modernas, accesibles y de alto rendimiento. Portfolio profesional con proyectos destacados.',
+          'Desarrollador frontend especializado en Angular y Tailwind CSS. Más de 4 años de experiencia construyendo interfaces modernas, accesibles y de alto rendimiento. Portfolio profesional con proyectos destacados.',
         ogTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
         twitterTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
       },
       en: {
         title: 'Francisco Larrosa - Frontend Developer | Portfolio',
         description:
-          'Frontend developer specialized in Angular and Tailwind CSS. Over 3 years of experience building modern, accessible, and high-performance interfaces. Professional portfolio with featured projects.',
+          'Frontend developer specialized in Angular and Tailwind CSS. Over 4 years of experience building modern, accessible, and high-performance interfaces. Professional portfolio with featured projects.',
         ogTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
         twitterTitle: 'Francisco Larrosa - Frontend Developer | Portfolio',
       },
@@ -389,7 +530,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       url: 'https://franciscolarrosa.com.ar',
       sameAs: [
         'https://github.com/FranciscoLarrosa96',
-        'https://www.linkedin.com/in/francisco-larrosa',
+        'https://www.linkedin.com/in/francisco-larrosa-784a3020b/',
       ],
       knowsAbout: [
         'Angular',
@@ -407,7 +548,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         'Web Development',
       ],
       description:
-        'Desarrollador frontend especializado en Angular y Tailwind CSS con más de 3 años de experiencia construyendo interfaces modernas, accesibles y de alto rendimiento.',
+        'Desarrollador frontend especializado en Angular y Tailwind CSS con más de 4 años de experiencia construyendo interfaces modernas, accesibles y de alto rendimiento.',
       alumniOf: {
         '@type': 'Organization',
         name: 'Frontend Developer',
@@ -436,7 +577,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   sendEmail() {
-    if (this.contactForm.invalid) return;
+    if (this.isSending) return;
+    this.sendSuccess = null;
+    this.contactForm.markAllAsTouched();
+    if (this.contactForm.invalid) {
+      const invalid = ['name', 'email', 'message'].find(
+        (name) => this.contactForm.get(name)?.invalid,
+      );
+      if (invalid) this.document.getElementById(invalid)?.focus();
+      return;
+    }
 
     this.isSending = true;
     const serviceID = 'service_email_portfolio';
@@ -444,7 +594,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     const publicKey = 'jHuV3S8GpBcTctdLe';
 
     emailjs
-      .send(serviceID, templateID, this.contactForm.value, publicKey)
+      .send(
+        serviceID,
+        templateID,
+        {
+          name: this.contactForm.value.name.trim(),
+          email: this.contactForm.value.email.trim(),
+          message: this.contactForm.value.message.trim(),
+        },
+        publicKey,
+      )
       .then(() => {
         this.sendSuccess = true;
         this.contactForm.reset();
