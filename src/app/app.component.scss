@@ -86,7 +86,10 @@ h3 { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -.7px
 .technical-details summary::-webkit-details-marker { display: none; }
 .technical-details summary span { color: var(--accent-text); font-size: 20px; transition: transform .25s var(--ease-out); }
 .technical-details[open] summary span { transform: rotate(45deg); }
-.technical-details p { font-size: 14px; color: var(--text-muted); line-height: 1.8; padding-bottom: 4px; }
+.technical-details .details-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--ease-out); }
+.technical-details[open] .details-content { grid-template-rows: 1fr; }
+.technical-details .details-content > p { overflow: hidden; min-height: 0; font-size: 14px; color: var(--text-muted); line-height: 1.8; padding-bottom: 4px; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .technical-details .details-content { transition: none; } }
 .cv-link { margin-top: 17px; }
 .contact-section { background: #29132f; color: #fff; position: relative; }
 .contact-grid { display: grid; grid-template-columns: 1.08fr 1fr; gap: 100px; align-items: start; }

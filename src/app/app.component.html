@@ -1,85 +1,453 @@
-<a class="skip-link" href="#main-content">{{ language === 'es' ? 'Saltar al contenido' : 'Skip to content' }}</a>
+<a class="skip-link" href="#main-content">{{
+  language === "es" ? "Saltar al contenido" : "Skip to content"
+}}</a>
 <div id="scroll-sentinel" aria-hidden="true"></div>
 <header class="site-header" [class.scrolled]="isScrolled">
   <div class="shell header-inner">
-    <a href="#home" class="brand" (click)="closeMobileMenu()" aria-label="Francisco Larrosa — Inicio"><span class="brand-mark" aria-hidden="true">f<span>.</span></span><span>Francisco Larrosa<span class="brand-role">Frontend Developer</span></span></a>
-    <nav class="desktop-nav" [attr.aria-label]="language === 'es' ? 'Navegación principal' : 'Main navigation'">
-      <a href="#projects" [class.active]="activeSection === 'projects'" [attr.aria-current]="activeSection === 'projects' ? 'location' : null">{{ language === 'es' ? 'Proyectos' : 'Projects' }}</a>
-      <a href="#about" [class.active]="activeSection === 'about'" [attr.aria-current]="activeSection === 'about' ? 'location' : null">{{ language === 'es' ? 'Sobre mí' : 'About' }}</a>
-      <a href="#contact" class="nav-contact" [attr.aria-current]="activeSection === 'contact' ? 'location' : null">{{ language === 'es' ? 'Hablemos' : 'Let’s talk' }} <span aria-hidden="true">↗</span></a>
+    <a
+      href="#home"
+      class="brand"
+      (click)="closeMobileMenu()"
+      aria-label="Francisco Larrosa — Inicio"
+      ><span class="brand-mark" aria-hidden="true">f<span>.</span></span
+      ><span
+        >Francisco Larrosa<span class="brand-role"
+          >Frontend Developer</span
+        ></span
+      ></a
+    >
+    <nav
+      class="desktop-nav"
+      [attr.aria-label]="
+        language === 'es' ? 'Navegación principal' : 'Main navigation'
+      "
+    >
+      <a
+        href="#projects"
+        [class.active]="activeSection === 'projects'"
+        [attr.aria-current]="activeSection === 'projects' ? 'location' : null"
+        >{{ language === "es" ? "Proyectos" : "Projects" }}</a
+      >
+      <a
+        href="#about"
+        [class.active]="activeSection === 'about'"
+        [attr.aria-current]="activeSection === 'about' ? 'location' : null"
+        >{{ language === "es" ? "Sobre mí" : "About" }}</a
+      >
+      <a
+        href="#contact"
+        class="nav-contact"
+        [attr.aria-current]="activeSection === 'contact' ? 'location' : null"
+        >{{ language === "es" ? "Hablemos" : "Let’s talk" }}
+        <span aria-hidden="true">↗</span></a
+      >
     </nav>
     <div class="header-controls">
-      <button type="button" class="language-control" (click)="toggleLanguage()" [attr.aria-label]="language === 'es' ? 'Switch to English' : 'Cambiar a español'"><span [class.selected]="language === 'es'">ES</span><span class="divider">/</span><span [class.selected]="language === 'en'">EN</span></button>
-      <button type="button" class="icon-button" (click)="toggleDarkMode()" [attr.aria-label]="language === 'es' ? (isDarkMode ? 'Activar tema claro' : 'Activar tema oscuro') : (isDarkMode ? 'Use light theme' : 'Use dark theme')" [attr.aria-pressed]="isDarkMode">
-        @if (isDarkMode) { <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg> }
-        @else { <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14a8.5 8.5 0 0 1-10.5-10.5A8.5 8.5 0 1 0 20.5 14Z"/></svg> }
+      <button
+        type="button"
+        class="language-control"
+        (click)="toggleLanguage()"
+        [attr.aria-label]="
+          language === 'es' ? 'Switch to English' : 'Cambiar a español'
+        "
+      >
+        <span [class.selected]="language === 'es'">ES</span
+        ><span class="divider">/</span
+        ><span [class.selected]="language === 'en'">EN</span>
       </button>
-      <button id="menu-toggle" type="button" class="icon-button menu-toggle" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen" aria-controls="mobile-navigation" [attr.aria-label]="language === 'es' ? 'Menú de navegación' : 'Navigation menu'"><svg viewBox="0 0 24 24" aria-hidden="true"><path [attr.d]="isMobileMenuOpen ? 'M6 6l12 12M6 18L18 6' : 'M4 7h16M4 12h16M4 17h16'"/></svg></button>
+      <button
+        type="button"
+        class="icon-button"
+        (click)="toggleDarkMode()"
+        [attr.aria-label]="
+          language === 'es'
+            ? isDarkMode
+              ? 'Activar tema claro'
+              : 'Activar tema oscuro'
+            : isDarkMode
+              ? 'Use light theme'
+              : 'Use dark theme'
+        "
+        [attr.aria-pressed]="isDarkMode"
+      >
+        @if (isDarkMode) {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+            />
+          </svg>
+        } @else {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 14a8.5 8.5 0 0 1-10.5-10.5A8.5 8.5 0 1 0 20.5 14Z" />
+          </svg>
+        }
+      </button>
+      <button
+        id="menu-toggle"
+        type="button"
+        class="icon-button menu-toggle"
+        (click)="toggleMobileMenu()"
+        [attr.aria-expanded]="isMobileMenuOpen"
+        aria-controls="mobile-navigation"
+        [attr.aria-label]="
+          language === 'es' ? 'Menú de navegación' : 'Navigation menu'
+        "
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            [attr.d]="
+              isMobileMenuOpen
+                ? 'M6 6l12 12M6 18L18 6'
+                : 'M4 7h16M4 12h16M4 17h16'
+            "
+          />
+        </svg>
+      </button>
     </div>
   </div>
-  <nav id="mobile-navigation" class="mobile-nav shell" [hidden]="!isMobileMenuOpen" [attr.aria-label]="language === 'es' ? 'Navegación móvil' : 'Mobile navigation'">
-    <a href="#home" (click)="closeMobileMenu()">{{ language === 'es' ? 'Inicio' : 'Home' }}</a>
-    <a href="#projects" (click)="closeMobileMenu()">{{ language === 'es' ? 'Proyectos' : 'Projects' }}</a>
-    <a href="#about" (click)="closeMobileMenu()">{{ language === 'es' ? 'Sobre mí' : 'About' }}</a>
-    <a href="#contact" (click)="closeMobileMenu()">{{ language === 'es' ? 'Hablemos' : 'Let’s talk' }} ↗</a>
+  <nav
+    id="mobile-navigation"
+    class="mobile-nav shell"
+    [hidden]="!isMobileMenuOpen"
+    [attr.aria-label]="
+      language === 'es' ? 'Navegación móvil' : 'Mobile navigation'
+    "
+  >
+    <a href="#home" (click)="closeMobileMenu()">{{
+      language === "es" ? "Inicio" : "Home"
+    }}</a>
+    <a href="#projects" (click)="closeMobileMenu()">{{
+      language === "es" ? "Proyectos" : "Projects"
+    }}</a>
+    <a href="#about" (click)="closeMobileMenu()">{{
+      language === "es" ? "Sobre mí" : "About"
+    }}</a>
+    <a href="#contact" (click)="closeMobileMenu()"
+      >{{ language === "es" ? "Hablemos" : "Let’s talk" }} ↗</a
+    >
   </nav>
 </header>
 
 <main id="main-content" tabindex="-1">
   <section id="home" class="hero shell" aria-labelledby="hero-title">
     <div class="hero-copy">
-      <p class="eyebrow hero-intro"><span class="status-dot" aria-hidden="true"></span>{{ language === 'es' ? 'Disponible para nuevos proyectos' : 'Available for new projects' }}</p>
-      <h1 id="hero-title"><span class="hero-line"><span>{{ language === 'es' ? 'Tu próxima idea.' : 'Your next idea.' }}</span></span><span class="hero-line"><span>{{ language === 'es' ? 'Una web que' : 'A website that' }}</span></span><span class="hero-line"><em>{{ language === 'es' ? 'deje huella.' : 'leaves a mark.' }}</em></span></h1>
-      <p class="hero-description">{{ language === 'es' ? 'Soy Francisco, desarrollador frontend. Transformo ideas en sitios y aplicaciones que se ven bien, se sienten fáciles y están hechos para crecer.' : 'I’m Francisco, a frontend developer. I turn ideas into websites and apps that look good, feel effortless, and are built to grow.' }}</p>
-      <div class="hero-actions"><a class="button button-primary" href="#projects">{{ language === 'es' ? 'Explorá mis proyectos' : 'Explore my projects' }}<span aria-hidden="true">↗</span></a><a class="text-link" href="#contact">{{ language === 'es' ? 'Contame tu idea' : 'Tell me your idea' }}<span aria-hidden="true">→</span></a></div>
+      <p class="eyebrow hero-intro">
+        <span class="status-dot" aria-hidden="true"></span
+        >{{
+          language === "es"
+            ? "Disponible para nuevos proyectos"
+            : "Available for new projects"
+        }}
+      </p>
+      <h1 id="hero-title">
+        <span class="hero-line"
+          ><span>{{
+            language === "es" ? "Tu próxima idea." : "Your next idea."
+          }}</span></span
+        ><span class="hero-line"
+          ><span>{{
+            language === "es" ? "Una web que" : "A website that"
+          }}</span></span
+        ><span class="hero-line"
+          ><em>{{
+            language === "es" ? "deje huella." : "leaves a mark."
+          }}</em></span
+        >
+      </h1>
+      <p class="hero-description">
+        {{
+          language === "es"
+            ? "Soy Francisco, desarrollador frontend. Transformo ideas en sitios y aplicaciones que se ven bien, se sienten fáciles y están hechos para crecer."
+            : "I’m Francisco, a frontend developer. I turn ideas into websites and apps that look good, feel effortless, and are built to grow."
+        }}
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#projects"
+          >{{
+            language === "es" ? "Explorá mis proyectos" : "Explore my projects"
+          }}<span aria-hidden="true">↗</span></a
+        ><a class="text-link" href="#contact"
+          >{{ language === "es" ? "Contame tu idea" : "Tell me your idea"
+          }}<span aria-hidden="true">→</span></a
+        >
+      </div>
     </div>
     <div class="hero-visual" id="hero-visual">
       <div class="portrait-stage">
-        <img src="assets/img/francisco.jpeg" alt="Francisco Larrosa" width="1024" height="1536" fetchpriority="high" class="hero-portrait">
-        <div class="portrait-caption"><span>Francisco Larrosa</span><span>{{ language === 'es' ? 'Argentina · Trabajo remoto' : 'Argentina · Working remotely' }}</span></div>
-        <span class="portrait-cross" aria-hidden="true">+</span><span class="portrait-sheen" aria-hidden="true"></span>
+        <img
+          src="assets/img/francisco.jpeg"
+          alt="Francisco Larrosa"
+          width="1024"
+          height="1536"
+          fetchpriority="high"
+          class="hero-portrait"
+        />
+        <div class="portrait-caption">
+          <span>Francisco Larrosa</span
+          ><span>{{
+            language === "es"
+              ? "Argentina · Trabajo remoto"
+              : "Argentina · Working remotely"
+          }}</span>
+        </div>
+        <span class="portrait-cross" aria-hidden="true">+</span
+        ><span class="portrait-sheen" aria-hidden="true"></span>
       </div>
-      <div class="experience-card"><strong>4<span>+</span></strong><div>{{ language === 'es' ? 'años de experiencia' : 'years of experience' }}<small>{{ language === 'es' ? 'De la idea a producción' : 'From idea to production' }}</small></div></div>
+      <div class="experience-card">
+        <strong>4<span>+</span></strong>
+        <div>
+          {{ language === "es" ? "años de experiencia" : "years of experience"
+          }}<small>{{
+            language === "es"
+              ? "De la idea a producción"
+              : "From idea to production"
+          }}</small>
+        </div>
+      </div>
       <div class="craft-tag" aria-hidden="true">&lt;/&gt;</div>
     </div>
   </section>
 
-  <section id="projects" class="work-section section-space" aria-labelledby="work-title">
+  <section
+    id="projects"
+    class="work-section section-space"
+    aria-labelledby="work-title"
+  >
     <div class="shell">
-      <div class="section-heading" data-reveal><div><p class="eyebrow section-label">{{ language === 'es' ? 'PROYECTOS SELECCIONADOS' : 'SELECTED WORK' }}</p><h2 id="work-title">{{ language === 'es' ? 'Ideas que ya' : 'Ideas brought' }}<br><em>{{ language === 'es' ? 'cobran vida.' : 'to life.' }}</em></h2></div><p>{{ language === 'es' ? 'Sitios institucionales, experiencias digitales y aplicaciones. Una muestra de lo que puedo construir con vos.' : 'Business websites, digital experiences, and applications. A glimpse of what we can build together.' }}</p></div>
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow section-label">
+            {{
+              language === "es" ? "PROYECTOS SELECCIONADOS" : "SELECTED WORK"
+            }}
+          </p>
+          <h2 id="work-title">
+            {{ language === "es" ? "Ideas que ya" : "Ideas brought"
+            }}<br /><em>{{
+              language === "es" ? "cobran vida." : "to life."
+            }}</em>
+          </h2>
+        </div>
+        <p>
+          {{
+            language === "es"
+              ? "Sitios institucionales, experiencias digitales y aplicaciones. Una muestra de lo que puedo construir con vos."
+              : "Business websites, digital experiences, and applications. A glimpse of what we can build together."
+          }}
+        </p>
+      </div>
       <div class="project-grid">
         @for (p of projects; track p.name; let i = $index) {
-          <article class="project-card" [class.featured]="i === 0" [attr.data-tone]="p.tone" data-reveal="rise" [style.--reveal-delay]="((i === 0 ? 0 : i - 1) * 100) + 'ms'">
-            <a class="project-visual" [href]="p.liveUrl" target="_blank" rel="noopener noreferrer" [attr.aria-label]="(language === 'es' ? 'Ver sitio de ' : 'Visit ') + p.name + (language === 'es' ? ' (abre en otra pestaña)' : ' (opens in a new tab)')">
-              <span class="project-number">0{{ i + 1 }} / {{ language === 'es' ? p.categoryEs : p.categoryEn }}</span>
-              <div class="project-screen"><div class="window-bar" aria-hidden="true"><span></span><span></span><span></span><small>{{ p.domain }}</small></div><img [src]="p.image" [alt]="(language === 'es' ? 'Captura del proyecto ' : 'Screenshot of ') + p.name" [width]="p.imageWidth" [height]="p.imageHeight" loading="lazy" decoding="async"></div>
-              <span class="visit-project">{{ language === 'es' ? 'Explorar sitio' : 'Explore website' }} <span aria-hidden="true">↗</span></span>
+          <article
+            class="project-card"
+            [class.featured]="i === 0"
+            [attr.data-tone]="p.tone"
+            data-reveal="rise"
+            [style.--reveal-delay]="(i === 0 ? 0 : i - 1) * 100 + 'ms'"
+          >
+            <a
+              class="project-visual"
+              [href]="p.liveUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="
+                (language === 'es' ? 'Ver sitio de ' : 'Visit ') +
+                p.name +
+                (language === 'es'
+                  ? ' (abre en otra pestaña)'
+                  : ' (opens in a new tab)')
+              "
+            >
+              <span class="project-number"
+                >0{{ i + 1 }} /
+                {{ language === "es" ? p.categoryEs : p.categoryEn }}</span
+              >
+              <div class="project-screen">
+                <div class="window-bar" aria-hidden="true">
+                  <span></span><span></span><span></span
+                  ><small>{{ p.domain }}</small>
+                </div>
+                <img
+                  [src]="p.image"
+                  [alt]="
+                    (language === 'es'
+                      ? 'Captura del proyecto '
+                      : 'Screenshot of ') + p.name
+                  "
+                  [width]="p.imageWidth"
+                  [height]="p.imageHeight"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <span class="visit-project"
+                >{{ language === "es" ? "Explorar sitio" : "Explore website" }}
+                <span aria-hidden="true">↗</span></span
+              >
             </a>
-            <div class="project-info"><div class="project-title-row"><h3>{{ p.name }}</h3><span class="project-index" aria-hidden="true">0{{ i + 1 }}</span></div><p>{{ language === 'es' ? p.descEs : p.descEn }}</p><ul class="stack-tags" [attr.aria-label]="language === 'es' ? 'Tecnologías utilizadas' : 'Technologies used'">@for (tech of p.stack; track tech) { <li>{{ tech }}</li> }</ul><div class="project-links"><a [href]="p.liveUrl" target="_blank" rel="noopener noreferrer">{{ language === 'es' ? 'Ver proyecto' : 'View project' }} <span aria-hidden="true">↗</span><span class="sr-only"> — {{ p.name }} ({{ language === 'es' ? 'nueva pestaña' : 'new tab' }})</span></a>@if (p.githubUrl && p.githubUrl !== p.liveUrl) { <a class="source-link" [href]="p.githubUrl" target="_blank" rel="noopener noreferrer">{{ language === 'es' ? 'Código' : 'Code' }} <span aria-hidden="true">↗</span><span class="sr-only"> — {{ p.name }} ({{ language === 'es' ? 'nueva pestaña' : 'new tab' }})</span></a> }</div></div>
+            <div class="project-info">
+              <div class="project-title-row">
+                <h3>{{ p.name }}</h3>
+                <span class="project-index" aria-hidden="true"
+                  >0{{ i + 1 }}</span
+                >
+              </div>
+              <p>{{ language === "es" ? p.descEs : p.descEn }}</p>
+              <ul
+                class="stack-tags"
+                [attr.aria-label]="
+                  language === 'es'
+                    ? 'Tecnologías utilizadas'
+                    : 'Technologies used'
+                "
+              >
+                @for (tech of p.stack; track tech) {
+                  <li>{{ tech }}</li>
+                }
+              </ul>
+              <div class="project-links">
+                <a [href]="p.liveUrl" target="_blank" rel="noopener noreferrer"
+                  >{{ language === "es" ? "Ver proyecto" : "View project" }}
+                  <span aria-hidden="true">↗</span
+                  ><span class="sr-only">
+                    — {{ p.name }} ({{
+                      language === "es" ? "nueva pestaña" : "new tab"
+                    }})</span
+                  ></a
+                >
+                @if (p.githubUrl && p.githubUrl !== p.liveUrl) {
+                  <a
+                    class="source-link"
+                    [href]="p.githubUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{{ language === "es" ? "Código" : "Code" }}
+                    <span aria-hidden="true">↗</span
+                    ><span class="sr-only">
+                      — {{ p.name }} ({{
+                        language === "es" ? "nueva pestaña" : "new tab"
+                      }})</span
+                    ></a
+                  >
+                }
+              </div>
+            </div>
           </article>
         }
       </div>
     </div>
   </section>
 
-  <section id="about" class="about-section section-space" aria-labelledby="about-title">
+  <section
+    id="about"
+    class="about-section section-space"
+    aria-labelledby="about-title"
+  >
     <div class="shell">
       <div class="about-grid">
-        <div class="about-photo" data-reveal="portrait"><img src="assets/img/francisco.avif" alt="Francisco Larrosa" width="997" height="1496" loading="lazy" decoding="async"><span>{{ language === 'es' ? 'La persona detrás del código.' : 'The person behind the code.' }}</span></div>
-        <div class="about-copy"><h2 id="about-title" data-reveal>{{ language === 'es' ? 'Buen diseño.' : 'Good design.' }}<br>{{ language === 'es' ? 'Buen código.' : 'Good code.' }}<br><em>{{ language === 'es' ? 'Misma importancia.' : 'Equally important.' }}</em></h2><p data-reveal>{{ language === 'es' ? '¡Hola! Soy Francisco Larrosa. Me especializo en Angular y disfruto convertir problemas complejos en experiencias simples de usar.' : 'Hi! I’m Francisco Larrosa. I specialize in Angular and enjoy turning complex problems into experiences that are simple to use.' }}</p><p data-reveal>{{ language === 'es' ? 'Hace más de 4 años desarrollo, mantengo y modernizo aplicaciones en producción. Cuido tanto lo que se ve como lo que hay detrás: interfaces accesibles, código mantenible y atención al detalle.' : 'For over 4 years, I’ve been building, maintaining, and modernizing production applications. I care about what you see and what runs behind it: accessible interfaces, maintainable code, and attention to detail.' }}</p>
-          <details class="technical-details" data-reveal><summary>{{ language === 'es' ? '¿Querés conocer el lado técnico?' : 'Curious about the technical side?' }}<span aria-hidden="true">+</span></summary><p>{{ language === 'es' ? 'Trabajo con Angular, TypeScript y Tailwind CSS. Utilizo componentes standalone para organizar la aplicación, Signals para gestionar estado reactivo y renderizado en servidor (SSR) cuando el proyecto lo requiere. Acompaño el desarrollo con pruebas unitarias.' : 'I work with Angular, TypeScript, and Tailwind CSS. I use standalone components to organize applications, Signals for reactive state, and server-side rendering (SSR) when the project needs it. I support development with unit tests.' }}</p></details>
-          <a data-reveal class="text-link cv-link" href="assets/Curriculum_Francisco_Larrosa.pdf" download="Francisco_Larrosa_CV.pdf">{{ language === 'es' ? 'Descargar mi CV' : 'Download my CV' }}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></a>
+        <div class="about-photo" data-reveal="portrait">
+          <img
+            src="assets/img/francisco.avif"
+            alt="Francisco Larrosa"
+            width="997"
+            height="1496"
+            loading="lazy"
+            decoding="async"
+          /><span>{{
+            language === "es"
+              ? "La persona detrás del código."
+              : "The person behind the code."
+          }}</span>
+        </div>
+        <div class="about-copy">
+          <h2 id="about-title" data-reveal>
+            {{ language === "es" ? "Buen diseño." : "Good design." }}<br />{{
+              language === "es" ? "Buen código." : "Good code."
+            }}<br /><em>{{
+              language === "es" ? "Misma importancia." : "Equally important."
+            }}</em>
+          </h2>
+          <p data-reveal>
+            {{
+              language === "es"
+                ? "¡Hola! Soy Francisco Larrosa. Me especializo en Angular y disfruto convertir problemas complejos en experiencias simples de usar."
+                : "Hi! I’m Francisco Larrosa. I specialize in Angular and enjoy turning complex problems into experiences that are simple to use."
+            }}
+          </p>
+          <p data-reveal>
+            {{
+              language === "es"
+                ? "Hace más de 4 años desarrollo, mantengo y modernizo aplicaciones en producción. Cuido tanto lo que se ve como lo que hay detrás: interfaces accesibles, código mantenible y atención al detalle."
+                : "For over 4 years, I’ve been building, maintaining, and modernizing production applications. I care about what you see and what runs behind it: accessible interfaces, maintainable code, and attention to detail."
+            }}
+          </p>
+          <details class="technical-details" data-reveal>
+            <summary>
+              {{
+                language === "es"
+                  ? "¿Querés conocer el lado técnico?"
+                  : "Curious about the technical side?"
+              }}<span aria-hidden="true">+</span>
+            </summary>
+            <div class="details-content">
+              <p>
+                {{
+                  language === "es"
+                    ? "Trabajo con Angular, TypeScript y Tailwind CSS. Utilizo componentes standalone para organizar la aplicación, Signals para gestionar estado reactivo y renderizado en servidor (SSR) cuando el proyecto lo requiere. Acompaño el desarrollo con pruebas unitarias."
+                    : "I work with Angular, TypeScript, and Tailwind CSS. I use standalone components to organize applications, Signals for reactive state, and server-side rendering (SSR) when the project needs it. I support development with unit tests."
+                }}
+              </p>
+            </div>
+          </details>
+          <a
+            data-reveal
+            class="text-link cv-link"
+            href="assets/Francisco_Larrosa-cv-2026.pdf"
+            download="Francisco_Larrosa_CV.pdf"
+            >{{ language === "es" ? "Descargar mi CV" : "Download my CV"
+            }}<svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4" /></svg
+          ></a>
         </div>
       </div>
       <div class="tech-block" aria-labelledby="tech-title">
         <div class="tech-heading" data-reveal>
-          <h3 id="tech-title">{{ language === 'es' ? 'Mi stack.' : 'My stack.' }}<br><em>{{ language === 'es' ? 'Listo para crear.' : 'Ready to build.' }}</em></h3>
-          <p>{{ language === 'es' ? 'De la interfaz a la lógica que la hace funcionar.' : 'From the interface to the logic that makes it work.' }}</p>
+          <h3 id="tech-title">
+            {{ language === "es" ? "Mi stack." : "My stack." }}<br /><em>{{
+              language === "es" ? "Listo para crear." : "Ready to build."
+            }}</em>
+          </h3>
+          <p>
+            {{
+              language === "es"
+                ? "De la interfaz a la lógica que la hace funcionar."
+                : "From the interface to the logic that makes it work."
+            }}
+          </p>
         </div>
         <ul class="tech-list">
           @for (tech of techStack; track tech.name; let i = $index) {
-            <li data-reveal="rise" [style.--reveal-delay]="(i % 3 * 75) + 'ms'" [class.core-tech]="i < 3">
-              <div class="tech-tile"><span class="tech-icon"><img [src]="tech.logo" alt="" width="28" height="28" loading="lazy"></span><span class="tech-text"><strong>{{ tech.name }}</strong><small>{{ language === 'es' ? tech.categoryEs : tech.categoryEn }}</small></span></div>
+            <li
+              data-reveal="rise"
+              [style.--reveal-delay]="(i % 3) * 75 + 'ms'"
+              [class.core-tech]="i < 3"
+            >
+              <div class="tech-tile">
+                <span class="tech-icon"
+                  ><img
+                    [src]="tech.logo"
+                    alt=""
+                    width="28"
+                    height="28"
+                    loading="lazy" /></span
+                ><span class="tech-text"
+                  ><strong>{{ tech.name }}</strong
+                  ><small>{{
+                    language === "es" ? tech.categoryEs : tech.categoryEn
+                  }}</small></span
+                >
+              </div>
             </li>
           }
         </ul>
@@ -87,18 +455,218 @@
     </div>
   </section>
 
-  <section id="contact" class="contact-section section-space" aria-labelledby="contact-title">
+  <section
+    id="contact"
+    class="contact-section section-space"
+    aria-labelledby="contact-title"
+  >
     <div class="shell contact-grid">
-      <div class="contact-copy"><h2 id="contact-title" data-reveal>{{ language === 'es' ? 'Todo empieza' : 'It all starts' }}<br>{{ language === 'es' ? 'con un' : 'with a' }} <em>{{ language === 'es' ? 'hola.' : 'hello.' }}</em></h2><p data-reveal>{{ language === 'es' ? '¿Una web nueva, una aplicación o una idea que necesita tomar forma? Contame qué tenés en mente y veamos cómo puedo ayudarte.' : 'A new website, an app, or an idea waiting to take shape? Tell me what you have in mind and let’s see how I can help.' }}</p><div class="contact-availability"><span class="status-dot" aria-hidden="true"></span>{{ language === 'es' ? 'Disponible para nuevos proyectos' : 'Available for new projects' }}</div><div class="social-links" data-reveal><a href="https://www.linkedin.com/in/francisco-larrosa-784a3020b/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> ({{ language === 'es' ? 'nueva pestaña' : 'new tab' }})</span></a><a href="https://github.com/FranciscoLarrosa96" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only"> ({{ language === 'es' ? 'nueva pestaña' : 'new tab' }})</span></a></div><p class="location">{{ language === 'es' ? 'Desde Argentina, para donde esté tu proyecto.' : 'Based in Argentina. Wherever your project takes us.' }}</p></div>
-      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="sendEmail()" [attr.aria-busy]="isSending" data-reveal="rise" style="--reveal-delay: 100ms" novalidate>
-        <p class="form-heading">{{ language === 'es' ? 'Contame sobre tu proyecto' : 'Tell me about your project' }}<span aria-hidden="true">↗</span></p>
-        <div class="field"><label for="name">{{ language === 'es' ? 'Tu nombre' : 'Your name' }}</label><input id="name" name="name" type="text" autocomplete="name" formControlName="name" required maxlength="100" [placeholder]="language === 'es' ? '¿Cómo te llamás?' : 'What’s your name?'" [attr.aria-invalid]="fieldInvalid('name')" [attr.aria-describedby]="fieldInvalid('name') ? 'name-error' : null">@if (fieldInvalid('name')) { <small id="name-error" class="field-error">{{ language === 'es' ? 'Escribí tu nombre para que pueda responderte.' : 'Please enter your name.' }}</small> }</div>
-        <div class="field"><label for="email">{{ language === 'es' ? 'Tu email' : 'Your email' }}</label><input id="email" name="email" type="email" autocomplete="email" formControlName="email" required maxlength="254" placeholder="nombre@empresa.com" [attr.aria-invalid]="fieldInvalid('email')" [attr.aria-describedby]="fieldInvalid('email') ? 'email-error' : null">@if (fieldInvalid('email')) { <small id="email-error" class="field-error">{{ language === 'es' ? 'Ingresá un email válido, por ejemplo nombre@empresa.com.' : 'Enter a valid email, such as name@company.com.' }}</small> }</div>
-        <div class="field"><label for="message">{{ language === 'es' ? '¿Qué te gustaría crear?' : 'What would you like to create?' }}</label><textarea id="message" name="message" formControlName="message" rows="4" required maxlength="5000" [placeholder]="language === 'es' ? 'Tu idea, qué necesitás, en qué etapa estás…' : 'Your idea, what you need, where things stand…'" [attr.aria-invalid]="fieldInvalid('message')" [attr.aria-describedby]="fieldInvalid('message') ? 'message-error' : null"></textarea>@if (fieldInvalid('message')) { <small id="message-error" class="field-error">{{ language === 'es' ? 'Contame brevemente qué necesitás.' : 'Tell me a little about what you need.' }}</small> }</div>
-        <button type="submit" class="button button-primary" [disabled]="isSending">{{ isSending ? (language === 'es' ? 'Enviando mensaje…' : 'Sending message…') : (language === 'es' ? 'Enviar mensaje' : 'Send message') }}<span aria-hidden="true">{{ isSending ? '···' : '↗' }}</span></button>
-        <div class="form-status" aria-live="polite" aria-atomic="true">@if (sendSuccess === true) { <p class="message-success">{{ language === 'es' ? '¡Gracias! Tu mensaje se envió correctamente. Te respondo a la brevedad.' : 'Thank you! Your message was sent. I’ll get back to you shortly.' }}</p> } @if (sendSuccess === false) { <p class="message-error">{{ language === 'es' ? 'No se pudo enviar. Tu mensaje sigue acá: podés reintentar o escribirme por LinkedIn.' : 'Your message couldn’t be sent. It’s still here: try again or contact me on LinkedIn.' }}</p> }</div>
+      <div class="contact-copy">
+        <h2 id="contact-title" data-reveal>
+          {{ language === "es" ? "Todo empieza" : "It all starts" }}<br />{{
+            language === "es" ? "con un" : "with a"
+          }}
+          <em>{{ language === "es" ? "hola." : "hello." }}</em>
+        </h2>
+        <p data-reveal>
+          {{
+            language === "es"
+              ? "¿Una web nueva, una aplicación o una idea que necesita tomar forma? Contame qué tenés en mente y veamos cómo puedo ayudarte."
+              : "A new website, an app, or an idea waiting to take shape? Tell me what you have in mind and let’s see how I can help."
+          }}
+        </p>
+        <div class="contact-availability">
+          <span class="status-dot" aria-hidden="true"></span
+          >{{
+            language === "es"
+              ? "Disponible para nuevos proyectos"
+              : "Available for new projects"
+          }}
+        </div>
+        <div class="social-links" data-reveal>
+          <a
+            href="https://www.linkedin.com/in/francisco-larrosa-784a3020b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn <span aria-hidden="true">↗</span
+            ><span class="sr-only">
+              ({{ language === "es" ? "nueva pestaña" : "new tab" }})</span
+            ></a
+          ><a
+            href="https://github.com/FranciscoLarrosa96"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub <span aria-hidden="true">↗</span
+            ><span class="sr-only">
+              ({{ language === "es" ? "nueva pestaña" : "new tab" }})</span
+            ></a
+          >
+        </div>
+        <p class="location">
+          {{
+            language === "es"
+              ? "Desde Argentina, para donde esté tu proyecto."
+              : "Based in Argentina. Wherever your project takes us."
+          }}
+        </p>
+      </div>
+      <form
+        class="contact-form"
+        [formGroup]="contactForm"
+        (ngSubmit)="sendEmail()"
+        [attr.aria-busy]="isSending"
+        data-reveal="rise"
+        style="--reveal-delay: 100ms"
+        novalidate
+      >
+        <p class="form-heading">
+          {{
+            language === "es"
+              ? "Contame sobre tu proyecto"
+              : "Tell me about your project"
+          }}<span aria-hidden="true">↗</span>
+        </p>
+        <div class="field">
+          <label for="name">{{
+            language === "es" ? "Tu nombre" : "Your name"
+          }}</label
+          ><input
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            formControlName="name"
+            required
+            maxlength="100"
+            [placeholder]="
+              language === 'es' ? '¿Cómo te llamás?' : 'What’s your name?'
+            "
+            [attr.aria-invalid]="fieldInvalid('name')"
+            [attr.aria-describedby]="fieldInvalid('name') ? 'name-error' : null"
+          />
+          @if (fieldInvalid("name")) {
+            <small id="name-error" class="field-error">{{
+              language === "es"
+                ? "Escribí tu nombre para que pueda responderte."
+                : "Please enter your name."
+            }}</small>
+          }
+        </div>
+        <div class="field">
+          <label for="email">{{
+            language === "es" ? "Tu email" : "Your email"
+          }}</label
+          ><input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            formControlName="email"
+            required
+            maxlength="254"
+            placeholder="nombre@empresa.com"
+            [attr.aria-invalid]="fieldInvalid('email')"
+            [attr.aria-describedby]="
+              fieldInvalid('email') ? 'email-error' : null
+            "
+          />
+          @if (fieldInvalid("email")) {
+            <small id="email-error" class="field-error">{{
+              language === "es"
+                ? "Ingresá un email válido, por ejemplo nombre@empresa.com."
+                : "Enter a valid email, such as name@company.com."
+            }}</small>
+          }
+        </div>
+        <div class="field">
+          <label for="message">{{
+            language === "es"
+              ? "¿Qué te gustaría crear?"
+              : "What would you like to create?"
+          }}</label
+          ><textarea
+            id="message"
+            name="message"
+            formControlName="message"
+            rows="4"
+            required
+            maxlength="5000"
+            [placeholder]="
+              language === 'es'
+                ? 'Tu idea, qué necesitás, en qué etapa estás…'
+                : 'Your idea, what you need, where things stand…'
+            "
+            [attr.aria-invalid]="fieldInvalid('message')"
+            [attr.aria-describedby]="
+              fieldInvalid('message') ? 'message-error' : null
+            "
+          ></textarea>
+          @if (fieldInvalid("message")) {
+            <small id="message-error" class="field-error">{{
+              language === "es"
+                ? "Contame brevemente qué necesitás."
+                : "Tell me a little about what you need."
+            }}</small>
+          }
+        </div>
+        <button
+          type="submit"
+          class="button button-primary"
+          [disabled]="isSending"
+        >
+          {{
+            isSending
+              ? language === "es"
+                ? "Enviando mensaje…"
+                : "Sending message…"
+              : language === "es"
+                ? "Enviar mensaje"
+                : "Send message"
+          }}<span aria-hidden="true">{{ isSending ? "···" : "↗" }}</span>
+        </button>
+        <div class="form-status" aria-live="polite" aria-atomic="true">
+          @if (sendSuccess === true) {
+            <p class="message-success">
+              {{
+                language === "es"
+                  ? "¡Gracias! Tu mensaje se envió correctamente. Te respondo a la brevedad."
+                  : "Thank you! Your message was sent. I’ll get back to you shortly."
+              }}
+            </p>
+          }
+          @if (sendSuccess === false) {
+            <p class="message-error">
+              {{
+                language === "es"
+                  ? "No se pudo enviar. Tu mensaje sigue acá: podés reintentar o escribirme por LinkedIn."
+                  : "Your message couldn’t be sent. It’s still here: try again or contact me on LinkedIn."
+              }}
+            </p>
+          }
+        </div>
       </form>
     </div>
   </section>
 </main>
-<footer class="site-footer"><div class="shell"><div class="footer-top" data-reveal><a href="#home" class="footer-name">Francisco<span> Larrosa.</span></a><a href="#home" class="back-top">{{ language === 'es' ? 'Volver arriba' : 'Back to top' }}<span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><p>© {{ currentYear }} Francisco Larrosa</p><p>{{ language === 'es' ? 'Hecho con criterio. Y unos cuantos mates.' : 'Thoughtfully built. Fueled by mate.' }}</p><span>Angular · TypeScript</span></div></div></footer>
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-top" data-reveal>
+      <a href="#home" class="footer-name">Francisco<span> Larrosa.</span></a
+      ><a href="#home" class="back-top"
+        >{{ language === "es" ? "Volver arriba" : "Back to top"
+        }}<span aria-hidden="true">↑</span></a
+      >
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ currentYear }} Francisco Larrosa</p>
+      <p>
+        {{
+          language === "es"
+            ? "Hecho con criterio. Y unos cuantos mates."
+            : "Thoughtfully built. Fueled by mate."
+        }}
+      </p>
+      <span>Angular · TypeScript</span>
+    </div>
+  </div>
+</footer>
