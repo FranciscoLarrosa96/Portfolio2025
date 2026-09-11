@@ -4,21 +4,18 @@
 .skip-link { position: fixed; top: -100px; left: 20px; z-index: 100; background: var(--surface); padding: 12px 20px; border: 2px solid var(--main-color); }
 .skip-link:focus { top: 12px; }
 #scroll-sentinel { position: absolute; top: 0; width: 1px; height: 1px; }
-.hero { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 20px 65px; padding-top: 63px; }
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 20px 65px; padding-top: 63px; padding-bottom: 80px; border-bottom: 1px solid var(--hairline); }
 .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .5px; display: flex; align-items: center; gap: 9px; margin: 0; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #2b925e; box-shadow: 0 0 0 4px #2b925e13; display: inline-block; flex-shrink: 0; }
 h1,h2,h3,p { margin-top: 0; }
 h1 { font-size: clamp(3.5rem,5.35vw,5rem); line-height: 1.06; letter-spacing: -.055em; font-weight: 600; margin: 28px 0; }
-h1 em,h2 em { font-family: 'Source Serif 4', Georgia, serif; color: var(--accent-text); font-weight: 500; letter-spacing: -.065em; }
+h1 em,h2 em { font-style: italic; color: var(--accent-text); font-weight: 600; letter-spacing: -.055em; line-height: 1.15; }
 .hero-description { color: var(--text-muted); font-size: 18px; line-height: 1.75; max-width: 480px; margin-bottom: 30px; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 26px; }
-.hero-note { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text-muted); margin-top: 34px; }
-.note-line { width: 24px; height: 1px; background: var(--accent-text); }
 .hero-visual { position: relative; padding-left: 20px; isolation: isolate; perspective: 1100px; }
 .portrait-stage { position: relative; background: #24102a; height: 510px; border-radius: 12px 12px 110px 12px; padding: 29px 29px 0; overflow: hidden; }
 .portrait-stage::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,#6b1d6870,transparent 60%); }
 .portrait-stage::after { content: ''; position: absolute; width: 340px; height: 340px; border: 1px solid #ffffff24; border-radius: 50%; right: -210px; top: -80px; }
-.portrait-index { position: relative; font-size: 12px; letter-spacing: 2.3px; color: #e9c6df; z-index: 1; }
 .hero-portrait { width: 100%; height: 410px; object-fit: cover; object-position: center 37%; border-radius: 130px 130px 10px 10px; margin-top: 20px; filter: saturate(.8); }
 .portrait-caption { position: absolute; bottom: 35px; left: 50px; z-index: 2; display: flex; flex-direction: column; color: white; text-shadow: 0 2px 12px #000; }
 .portrait-caption span:first-child { font-size: 20px; font-weight: 600; }
@@ -30,10 +27,6 @@ h1 em,h2 em { font-family: 'Source Serif 4', Georgia, serif; color: var(--accent
 .experience-card div { font-size: 14px; font-weight: 600; }
 .experience-card small { display: block; font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 5px; }
 .craft-tag { position: absolute; background: var(--main-color); color: #fff; width: 73px; height: 73px; display: grid; place-items: center; border-radius: 17px; top: 55px; right: -21px; font-size: 23px; transform: rotate(9deg); box-shadow: 0 12px 25px #22002320; font-family: monospace; }
-.hero-bottom { grid-column: 1/-1; margin-top: 36px; border-top: 1px solid var(--hairline); display: flex; align-items: center; justify-content: space-between; padding-block: 24px; gap: 20px; }
-.hero-bottom > span { font-size: 12px; letter-spacing: 1.8px; color: var(--text-muted); }
-.hero-bottom a { display: flex; align-items: center; gap: 23px; min-height: 44px; font-size: 13px; }
-.hero-bottom a span { font-size: 23px; }
 .work-section { background: var(--work-bg); }
 .section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 50px; margin-bottom: 48px; }
 .section-label { font-size: 12px; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 24px; }
@@ -110,7 +103,7 @@ h3 { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -.7px
 .form-status p { margin: 18px 0 0; font-size: 14px; line-height: 1.7; }
 .message-success { color: var(--text-primary); border-left: 3px solid #2b925e; padding-left: 12px; }
 .message-error { color: var(--accent-text); }
-@media (min-width: 1600px) { .hero { padding-top: 90px; } .hero-bottom { margin-top: 70px; } }
+@media (min-width: 1600px) { .hero { padding-top: 90px; } }
 @media (max-width: 1100px) {
   .shell { width: calc(100% - 72px); }
   .hero { gap: 24px 35px; }
@@ -143,7 +136,6 @@ h3 { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -.7px
   .hero-description { font-size: 16px; }
   .portrait-stage { height: 420px; border-bottom-right-radius: 70px; padding: 20px 14px 0; }
   .hero-portrait { height: 340px; margin-top: 15px; }
-  .portrait-index { font-size: 9px; letter-spacing: 1px; }
   .portrait-caption { left: 26px; bottom: 38px; }
   .portrait-caption span:first-child { font-size: 17px; }
   .portrait-caption span:last-child { font-size: 10px; }
@@ -182,18 +174,14 @@ h3 { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -.7px
   .hero-description { font-size: 17px; max-width: none; }
   .hero-actions { gap: 14px 22px; }
   .hero-actions .button { min-height: 54px; }
-  .hero-note { font-size: 12px; margin-top: 25px; }
   .hero-visual { width: min(100%,410px); margin-inline: auto; padding: 0 9px 0 15px; }
   .portrait-stage { height: 395px; border-bottom-right-radius: 90px; padding: 24px 25px 0; }
   .hero-portrait { height: 315px; object-position: 50% 33%; margin-top: 16px; border-radius: 110px 110px 8px 8px; }
-  .portrait-index { font-size: 10px; letter-spacing: 1.8px; }
   .portrait-caption { left: 40px; bottom: 32px; }
   .experience-card { padding: 17px 21px; }
   .experience-card div { font-size: 13px; }
   .craft-tag { right: 0; top: 45px; }
-  .hero-bottom { margin-top: 0; padding-block: 18px; gap: 10px; }
-  .hero-bottom > span { font-size: 9px; letter-spacing: 1px; max-width: 155px; }
-  .hero-bottom a { font-size: 12px; gap: 10px; }
+  .hero { padding-bottom: 56px; }
   .section-space { padding-block: 64px; }
   .section-heading { display: block; margin-bottom: 30px; }
   h2 { font-size: 2.7rem; }

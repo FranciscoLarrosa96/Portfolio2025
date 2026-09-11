@@ -2,7 +2,7 @@
 .tech-block { margin-top: 76px; padding: 42px 0 0; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: minmax(220px,.8fr) minmax(0,1.6fr); align-items: center; gap: 64px; }
 .tech-heading .section-label { margin-bottom: 18px; font-size: 12px; }
 .tech-heading h3 { font-size: clamp(2rem,3vw,2.7rem); line-height: 1.15; letter-spacing: -.05em; margin: 0 0 18px; }
-.tech-heading h3 em { color: var(--accent-text); font-family: 'Source Serif 4',Georgia,serif; font-weight: 500; }
+.tech-heading h3 em { color: var(--accent-text); font-style: italic; font-weight: 600; }
 .tech-heading > p:last-child { max-width: 260px; font-size: 16px; line-height: 1.65; color: var(--text-muted); margin: 0; }
 .tech-list { list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; padding: 0; margin: 0; }
 .tech-list li { min-width: 0; }
