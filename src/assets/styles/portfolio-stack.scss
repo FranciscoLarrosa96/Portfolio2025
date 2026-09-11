@@ -6,7 +6,7 @@
 .tech-heading > p:last-child { max-width: 260px; font-size: 16px; line-height: 1.65; color: var(--text-muted); margin: 0; }
 .tech-list { list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; padding: 0; margin: 0; }
 .tech-list li { min-width: 0; }
-.tech-tile { height: 100%; min-height: 91px; display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--hairline); border-radius: 10px; background: var(--surface); transition: border-color .25s,box-shadow .25s,transform .35s var(--ease-out); }
+.tech-tile { height: 100%; min-height: 91px; display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid var(--hairline); border-radius: 10px; background: var(--surface); transition: border-color .25s var(--ease-out),box-shadow .25s var(--ease-out),transform .3s var(--ease-out); }
 .core-tech .tech-tile { background: linear-gradient(125deg,color-mix(in srgb,var(--main-color) 6%,var(--surface)),var(--surface)); border-color: color-mix(in srgb,var(--accent-text) 27%,var(--hairline)); }
 .tech-icon { flex: 0 0 40px; width: 40px; height: 40px; display: grid; place-items: center; background: #fff; border-radius: 9px; border: 1px solid #ece8ef; }
 .tech-icon img { width: 26px; height: 26px; object-fit: contain; }
